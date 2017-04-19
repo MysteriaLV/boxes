@@ -2,11 +2,6 @@
 
 #include <Automaton.h>
 
-#include "FastLED.h"
-
-#define NUM_LEDS 144*4
-
-
 class Atm_led_ribbon : public Machine {
 
 public:
@@ -18,20 +13,13 @@ public:
     }; // EVENTS
     Atm_led_ribbon(void) : Machine() {};
 
-    Atm_led_ribbon &begin(int pin);
-
+    Atm_led_ribbon &begin();
     Atm_led_ribbon &trace(Stream &stream);
-
     Atm_led_ribbon &trigger(int event);
-
     int state(void);
-
     Atm_led_ribbon &onFinished(Machine &machine, int event = 0);
-
     Atm_led_ribbon &onFinished(atm_cb_push_t callback, int idx = 0);
-
     Atm_led_ribbon &make_progress(void);
-
     Atm_led_ribbon &wrong_move(void);
 
 private:
@@ -44,11 +32,9 @@ private:
     atm_connector connectors[CONN_MAX];
 
     int event(int id);
-
     void action(int id);
 
     static const int LENGTH = 50;
-    CRGB leds[LENGTH];
 
     atm_timer_millis timer_repeat;
     atm_counter counter_progress;

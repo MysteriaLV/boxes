@@ -1,6 +1,7 @@
 #include "Atm_led_ribbon.h"
+#include "multipart_led_ribbon.h"
 
-Atm_led_ribbon &Atm_led_ribbon::begin(int attached_pin) {
+Atm_led_ribbon &Atm_led_ribbon::begin() {
     // clang-format off
     const static state_t state_table[] PROGMEM = {
             /*                           ON_ENTER  ON_LOOP  ON_EXIT  EVT_COUNTDOWN_ZERO  EVT_TIMER_TICK  EVT_MAKE_PROGRESS  EVT_WRONG_MOVE         ELSE */
@@ -11,10 +12,6 @@ Atm_led_ribbon &Atm_led_ribbon::begin(int attached_pin) {
     };
     // clang-format on
     Machine::begin(state_table, ELSE);
-
-//    FastLED.addLeds<NEOPIXEL, attached_pin>(leds, LENGTH);
-    FastLED.addLeds<NEOPIXEL, 13>(leds, LENGTH);
-    FastLED.setBrightness(1);
 
     counter_progress.set(ATM_COUNTER_OFF);
     timer_repeat.set(ATM_TIMER_OFF);
@@ -49,8 +46,8 @@ void Atm_led_ribbon::action(int id) {
             timer_repeat.set(ATM_TIMER_OFF);
             counter_progress.set(LENGTH);
 
-            fill_solid(leds, LENGTH /*number of leds*/, CRGB::Black);
-            FastLED.show();
+            multipartLedRibbon.fill_solid(0, LENGTH, CRGB::Black);
+            multipartLedRibbon.show();
             return;
         case ENT_INIT_PROGRESS:
             timer_repeat.set(50);
@@ -58,13 +55,15 @@ void Atm_led_ribbon::action(int id) {
             return;
         case ENT_PROGRESSING:
             counter_progress.decrement();
-            fill_solid(leds, LENGTH - counter_progress.value /*number of leds*/, CRGB::Teal);
-            FastLED.show();
+
+            multipartLedRibbon.fill_solid(0, LENGTH - counter_progress.value, CRGB::Teal);
+            multipartLedRibbon.show();
             return;
         case ENT_FINISHED:
             counter_progress.set(ATM_COUNTER_OFF);
-            fill_solid(leds, LENGTH /*number of leds*/, CRGB::MediumSeaGreen);
-            FastLED.show();
+
+            multipartLedRibbon.fill_solid(0, LENGTH, CRGB::MediumSeaGreen);
+            multipartLedRibbon.show();
             return;
     }
 }

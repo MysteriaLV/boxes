@@ -46,7 +46,7 @@ void Atm_led_ribbon::action(int id) {
             timer_repeat.set(ATM_TIMER_OFF);
             counter_progress.set(LENGTH);
 
-            multipartLedRibbon.fill_solid(0, LENGTH, CRGB::Black);
+            multipartLedRibbon.fill_sold_ext(0, LENGTH, CRGB::Black);
             multipartLedRibbon.show();
             return;
         case ENT_INIT_PROGRESS:
@@ -56,13 +56,13 @@ void Atm_led_ribbon::action(int id) {
         case ENT_PROGRESSING:
             counter_progress.decrement();
 
-            multipartLedRibbon.fill_solid(0, LENGTH - counter_progress.value, CRGB::Teal);
+            multipartLedRibbon.fill_sold_ext(0, LENGTH - counter_progress.value, CRGB::Teal);
             multipartLedRibbon.show();
             return;
         case ENT_FINISHED:
             counter_progress.set(ATM_COUNTER_OFF);
 
-            multipartLedRibbon.fill_solid(0, LENGTH, CRGB::MediumSeaGreen);
+            multipartLedRibbon.fill_sold_ext(0, LENGTH, CRGB::MediumSeaGreen);
             multipartLedRibbon.show();
             return;
     }

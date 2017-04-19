@@ -11,10 +11,8 @@
 
 class MultipartLedRibbon {
 public:
-    MultipartLedRibbon(void);
-
-    void fill_solid(int from, int length, CRGB color);
-
+    void setup();
+    void fill_sold_ext(int from, int length, uint32_t color);
     void show();
 
     CRGB leds[NUM_LEDS];

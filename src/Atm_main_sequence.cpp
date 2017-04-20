@@ -1,7 +1,11 @@
 #include "Atm_main_sequence.h"
 
 Atm_button button1;
-Atm_q1_one_button q1OneButton;
+Atm_button button2;
+Atm_button button3;
+Atm_button button4;
+Atm_button button5;
+Atm_button button6;
 Atm_main_sequence main_sequence;
 
 /* Add optional parameters for the state machine to begin()
@@ -23,9 +27,8 @@ Atm_main_sequence &Atm_main_sequence::begin() {
     };
     // clang-format on
     Machine::begin(state_table, ELSE);
-    q1OneButton.begin();
 
-
+    trace( Serial );
     return *this;
 }
 
@@ -46,8 +49,11 @@ int Atm_main_sequence::event(int id) {
 void Atm_main_sequence::action(int id) {
     switch (id) {
         case ENT_Q1_ONE_BUTTON:
+            q1OneButton.begin();
             return;
         case ENT_Q2_TWO_BUTTONS:
+            q1OneButton.sleep(ATM_SLEEP_FLAG);
+            q2TwoButtons.begin();
             return;
         case ENT_Q3_THREE_BUTTONS:
             return;

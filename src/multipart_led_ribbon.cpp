@@ -7,12 +7,12 @@
 MultipartLedRibbon multipartLedRibbon;
 
 void MultipartLedRibbon::setup() {
-    FastLED.addLeds<NEOPIXEL, 13>(leds, NUM_LEDS);
+    FastLED.addLeds<NEOPIXEL, LED_RIBBON_PIN>(leds, NUM_LEDS);
     FastLED.setBrightness(1);
 }
 
 void MultipartLedRibbon::fill_sold_ext(int from, int length, uint32_t color) {
-    fill_solid(leds, length, color);
+    fill_solid(&leds[from], length, color);
 }
 
 void MultipartLedRibbon::show() {

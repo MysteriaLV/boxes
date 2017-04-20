@@ -7,6 +7,7 @@
 
 #include <FastLED.h>
 
+#define LED_RIBBON_PIN 13
 #define NUM_LEDS 144*4
 
 class MultipartLedRibbon {

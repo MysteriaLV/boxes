@@ -2,33 +2,25 @@
 
 #include <Automaton.h>
 
-class Atm_led_ribbon : public Machine {
+class Atm_q1_one_button : public Machine {
 
 public:
-    enum {
-        IDLE, INIT_PROGRESS, PROGRESSING, FINISHED
-    }; // STATES
-    enum {
-        EVT_COUNTDOWN_ZERO, EVT_TIMER_TICK, EVT_MAKE_PROGRESS, EVT_WRONG_MOVE, ELSE
-    }; // EVENTS
-    Atm_led_ribbon(void) : Machine() {};
+    enum { IDLE, INIT_PROGRESS, PROGRESSING, FINISHED }; // STATES
+    enum { EVT_COUNTDOWN_ZERO, EVT_TIMER_TICK, EVT_MAKE_PROGRESS, EVT_WRONG_MOVE, ELSE }; // EVENTS
+    Atm_q1_one_button(void) : Machine() {};
 
-    Atm_led_ribbon &begin();
-    Atm_led_ribbon &trace(Stream &stream);
-    Atm_led_ribbon &trigger(int event);
+    Atm_q1_one_button &begin();
+    Atm_q1_one_button &trace(Stream &stream);
+    Atm_q1_one_button &trigger(int event);
     int state(void);
-    Atm_led_ribbon &onFinished(Machine &machine, int event = 0);
-    Atm_led_ribbon &onFinished(atm_cb_push_t callback, int idx = 0);
-    Atm_led_ribbon &make_progress(void);
-    Atm_led_ribbon &wrong_move(void);
+    Atm_q1_one_button &onFinished(Machine &machine, int event = 0);
+    Atm_q1_one_button &onFinished(atm_cb_push_t callback, int idx = 0);
+    Atm_q1_one_button &make_progress(void);
+    Atm_q1_one_button &wrong_move(void);
 
 private:
-    enum {
-        ENT_IDLE, ENT_INIT_PROGRESS, ENT_PROGRESSING, ENT_FINISHED
-    }; // ACTIONS
-    enum {
-        ON_FINISHED, CONN_MAX
-    }; // CONNECTORS
+    enum { ENT_IDLE, ENT_INIT_PROGRESS, ENT_PROGRESSING, ENT_FINISHED }; // ACTIONS
+    enum { ON_FINISHED, CONN_MAX }; // CONNECTORS
     atm_connector connectors[CONN_MAX];
 
     int event(int id);
@@ -45,7 +37,7 @@ Automaton::ATML::begin - Automaton Markup Language
 
 <?xml version="1.0" encoding="UTF-8"?>
 <machines>
-  <machine name="Atm_led_ribbon">
+  <machine name="Atm_q1_one_button">
     <states>
       <IDLE index="0" on_enter="ENT_IDLE">
         <EVT_MAKE_PROGRESS>INIT_PROGRESS</EVT_MAKE_PROGRESS>

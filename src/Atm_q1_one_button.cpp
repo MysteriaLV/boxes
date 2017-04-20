@@ -1,7 +1,8 @@
-#include "Atm_led_ribbon.h"
+#include "Atm_q1_one_button.h"
+#include "Atm_main_sequence.h"
 #include "multipart_led_ribbon.h"
 
-Atm_led_ribbon &Atm_led_ribbon::begin() {
+Atm_q1_one_button &Atm_q1_one_button::begin() {
     // clang-format off
     const static state_t state_table[] PROGMEM = {
             /*                           ON_ENTER  ON_LOOP  ON_EXIT  EVT_COUNTDOWN_ZERO  EVT_TIMER_TICK  EVT_MAKE_PROGRESS  EVT_WRONG_MOVE         ELSE */
@@ -13,6 +14,9 @@ Atm_led_ribbon &Atm_led_ribbon::begin() {
     // clang-format on
     Machine::begin(state_table, ELSE);
 
+    button1 .onPress(*this, this->EVT_MAKE_PROGRESS)
+            .onRelease(*this, this->EVT_WRONG_MOVE);
+
     counter_progress.set(ATM_COUNTER_OFF);
     timer_repeat.set(ATM_TIMER_OFF);
 
@@ -23,7 +27,7 @@ Atm_led_ribbon &Atm_led_ribbon::begin() {
  * The code must return 1 to trigger the event
  */
 
-int Atm_led_ribbon::event(int id) {
+int Atm_q1_one_button::event(int id) {
     switch (id) {
         case EVT_TIMER_TICK:
             return timer_repeat.expired(this);
@@ -40,7 +44,7 @@ int Atm_led_ribbon::event(int id) {
  *   push( connectors, ON_FINISHED, 0, <v>, <up> );
  */
 
-void Atm_led_ribbon::action(int id) {
+void Atm_q1_one_button::action(int id) {
     switch (id) {
         case ENT_IDLE:
             timer_repeat.set(ATM_TIMER_OFF);
@@ -64,6 +68,8 @@ void Atm_led_ribbon::action(int id) {
 
             multipartLedRibbon.fill_sold_ext(0, LENGTH, CRGB::MediumSeaGreen);
             multipartLedRibbon.show();
+
+            main_sequence.trigger(main_sequence.EVT_SOLVED);
             return;
     }
 }
@@ -72,7 +78,7 @@ void Atm_led_ribbon::action(int id) {
  * Control how your machine processes triggers
  */
 
-Atm_led_ribbon &Atm_led_ribbon::trigger(int event) {
+Atm_q1_one_button &Atm_q1_one_button::trigger(int event) {
     Machine::trigger(event);
     return *this;
 }
@@ -81,7 +87,7 @@ Atm_led_ribbon &Atm_led_ribbon::trigger(int event) {
  * Control what the machine returns when another process requests its state
  */
 
-int Atm_led_ribbon::state(void) {
+int Atm_q1_one_button::state(void) {
     return Machine::state();
 }
 
@@ -93,12 +99,12 @@ int Atm_led_ribbon::state(void) {
  *
  */
 
-Atm_led_ribbon &Atm_led_ribbon::make_progress() {
+Atm_q1_one_button &Atm_q1_one_button::make_progress() {
     trigger(EVT_MAKE_PROGRESS);
     return *this;
 }
 
-Atm_led_ribbon &Atm_led_ribbon::wrong_move() {
+Atm_q1_one_button &Atm_q1_one_button::wrong_move() {
     trigger(EVT_WRONG_MOVE);
     return *this;
 }
@@ -107,12 +113,12 @@ Atm_led_ribbon &Atm_led_ribbon::wrong_move() {
  * onFinished() push connector variants ( slots 1, autostore 0, broadcast 0 )
  */
 
-Atm_led_ribbon &Atm_led_ribbon::onFinished(Machine &machine, int event) {
+Atm_q1_one_button &Atm_q1_one_button::onFinished(Machine &machine, int event) {
     onPush(connectors, ON_FINISHED, 0, 1, 1, machine, event);
     return *this;
 }
 
-Atm_led_ribbon &Atm_led_ribbon::onFinished(atm_cb_push_t callback, int idx) {
+Atm_q1_one_button &Atm_q1_one_button::onFinished(atm_cb_push_t callback, int idx) {
     onPush(connectors, ON_FINISHED, 0, 1, 1, callback, idx);
     return *this;
 }
@@ -121,7 +127,7 @@ Atm_led_ribbon &Atm_led_ribbon::onFinished(atm_cb_push_t callback, int idx) {
  * Sets the symbol table and the default logging method for serial monitoring
  */
 
-Atm_led_ribbon &Atm_led_ribbon::trace(Stream &stream) {
+Atm_q1_one_button &Atm_q1_one_button::trace(Stream &stream) {
     Machine::setTrace(&stream, atm_serial_debug::trace,
                       "LED_RIBBON\0EVT_COUNTDOWN_ZERO\0EVT_TIMER_TICK\0EVT_MAKE_PROGRESS\0EVT_WRONG_MOVE\0ELSE\0IDLE\0INIT_PROGRESS\0PROGRESSING\0FINISHED");
     return *this;

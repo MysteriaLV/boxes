@@ -1,8 +1,11 @@
 #include "Atm_morse_reader.h"
+#include "multipart_led_ribbon.h"
+#include "Atm_main_sequence.h"
 
 /* Add optional parameters for the state machine to begin()
  * Add extra initialization code
  */
+Atm_morse_reader q4SingleMorseReader;
 
 Atm_morse_reader& Atm_morse_reader::begin() {
   // clang-format off
@@ -45,6 +48,9 @@ int Atm_morse_reader::event( int id ) {
 void Atm_morse_reader::action( int id ) {
   switch ( id ) {
     case ENT_IDLE:
+      led1.begin( 30 ).blink( 40, 250 ); // Setup blinking
+      led1.trigger( led1.EVT_BLINK );   // Start blinking
+
       return;
     case EXT_IDLE:
       return;

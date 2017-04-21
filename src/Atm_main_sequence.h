@@ -4,6 +4,7 @@
 #include "Atm_q1_one_button.h"
 #include "Atm_q2_two_buttons.h"
 #include "Atm_q3_three_buttons.h"
+#include "Atm_morse_reader.h"
 
 class Atm_main_sequence: public Machine {
 
@@ -24,15 +25,12 @@ class Atm_main_sequence: public Machine {
 
 };
 
-extern Atm_button button1;
-extern Atm_button button2;
-extern Atm_button button3;
-extern Atm_button button4;
-extern Atm_button button5;
-extern Atm_button button6;
+extern Atm_button button1, button2, button3, button4, button5, button6;
+extern Atm_led led1, led2, led3, led4, led5, led6;
 extern Atm_q1_one_button q1OneButton;
 extern Atm_q2_two_buttons q2TwoButtons;
 extern Atm_q3_three_buttons q3ThreeButtons;
+extern Atm_morse_reader q4SingleMorseReader;
 extern Atm_main_sequence main_sequence;
 
 /*

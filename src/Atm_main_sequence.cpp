@@ -1,11 +1,8 @@
 #include "Atm_main_sequence.h"
 
-Atm_button button1;
-Atm_button button2;
-Atm_button button3;
-Atm_button button4;
-Atm_button button5;
-Atm_button button6;
+
+Atm_button button1, button2, button3, button4, button5, button6;
+Atm_led led1, led2, led3, led4, led5, led6;
 Atm_main_sequence main_sequence;
 
 /* Add optional parameters for the state machine to begin()
@@ -50,6 +47,7 @@ void Atm_main_sequence::action(int id) {
     switch (id) {
         case ENT_Q1_ONE_BUTTON:
             q1OneButton.begin();
+//            q4SingleMorseReader.begin();
             return;
         case ENT_Q2_TWO_BUTTONS:
             q1OneButton.sleep(ATM_SLEEP_FLAG);
@@ -60,6 +58,8 @@ void Atm_main_sequence::action(int id) {
             q3ThreeButtons.begin();
             return;
         case ENT_Q4_SINGLE_MORSE:
+            q3ThreeButtons.sleep(ATM_SLEEP_FLAG);
+            q4SingleMorseReader.begin();
             return;
         case ENT_Q5_MULTI_MORSE:
             return;

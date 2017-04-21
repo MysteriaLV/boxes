@@ -2,8 +2,6 @@
 #include "multipart_led_ribbon.h"
 #include "SimpleModbusSlaveSoftwareSerial.h"
 
-Atm_led led1, led2, led3;
-
 void setup() {
     modbus_configure(57600, 3, 3, 1);
 
@@ -18,14 +16,14 @@ void setup() {
     button5.begin(6);
     button6.begin(7);
 
-    main_sequence.begin();
+    led1.begin( 30 );
+    led2.begin( 31 );
+    led3.begin( 32 );
+    led4.begin( 33 );
+    led5.begin( 34 );
+    led6.begin( 35 );
 
-    led1.begin( 30 ).blink( 40, 250 ); // Setup blinking
-    led2.begin( 31 ).blink( 40, 50 );
-    led3.begin( 32 ).blink( 40, 150 );
-    led1.trigger( led1.EVT_BLINK );   // Start blinking
-    led2.trigger( led2.EVT_BLINK );
-    led3.trigger( led3.EVT_BLINK );
+    main_sequence.begin();
 }
 
 void loop() {

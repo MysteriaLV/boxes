@@ -3,6 +3,7 @@
 #include <Automaton.h>
 #include "Atm_q1_one_button.h"
 #include "Atm_q2_two_buttons.h"
+#include "Atm_q3_three_buttons.h"
 
 class Atm_main_sequence: public Machine {
 
@@ -31,6 +32,7 @@ extern Atm_button button5;
 extern Atm_button button6;
 extern Atm_q1_one_button q1OneButton;
 extern Atm_q2_two_buttons q2TwoButtons;
+extern Atm_q3_three_buttons q3ThreeButtons;
 extern Atm_main_sequence main_sequence;
 
 /*

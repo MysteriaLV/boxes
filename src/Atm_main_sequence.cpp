@@ -56,6 +56,8 @@ void Atm_main_sequence::action(int id) {
             q2TwoButtons.begin();
             return;
         case ENT_Q3_THREE_BUTTONS:
+            q2TwoButtons.sleep(ATM_SLEEP_FLAG);
+            q3ThreeButtons.begin();
             return;
         case ENT_Q4_SINGLE_MORSE:
             return;

@@ -9,7 +9,7 @@ public:
     enum { EVT_COUNTDOWN_ZERO, EVT_TIMER_TICK, EVT_MAKE_PROGRESS, EVT_WRONG_MOVE, ELSE }; // EVENTS
     Atm_q1_one_button(void) : Machine() {};
 
-    Atm_q1_one_button &begin();
+    Machine &begin();
     Atm_q1_one_button &trace(Stream &stream);
     Atm_q1_one_button &trigger(int event);
     int state(void);
@@ -18,7 +18,7 @@ public:
     Atm_q1_one_button &make_progress(void);
     Atm_q1_one_button &wrong_move(void);
 
-private:
+protected:
     enum { ENT_IDLE, ENT_INIT_PROGRESS, ENT_PROGRESSING, ENT_FINISHED }; // ACTIONS
     enum { ON_FINISHED, CONN_MAX }; // CONNECTORS
     atm_connector connectors[CONN_MAX];
@@ -26,7 +26,8 @@ private:
     int event(int id);
     void action(int id);
 
-    static const int LENGTH = 50;
+    virtual int getOffset() { return  0; };
+    virtual int getLength() { return 20; };
 
     atm_timer_millis timer_repeat;
     atm_counter counter_progress;

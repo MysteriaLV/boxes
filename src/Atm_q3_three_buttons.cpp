@@ -1,9 +1,10 @@
-#include "Atm_q2_two_buttons.h"
+#include "Atm_q3_three_buttons.h"
 #include "Atm_main_sequence.h"
 
-Atm_q2_two_buttons q2TwoButtons;
+Atm_controller ctrl;
+Atm_q3_three_buttons q3ThreeButtons;
 
-Machine &Atm_q2_two_buttons::begin() {
+Machine &Atm_q3_three_buttons::begin() {
     // clang-format off
     const static state_t state_table[] PROGMEM = {
             /*                           ON_ENTER  ON_LOOP  ON_EXIT  EVT_COUNTDOWN_ZERO  EVT_TIMER_TICK  EVT_MAKE_PROGRESS  EVT_WRONG_MOVE         ELSE */
@@ -19,7 +20,7 @@ Machine &Atm_q2_two_buttons::begin() {
     timer_repeat.set(ATM_TIMER_OFF);
 
     ctrl.begin( false )
-            .IF( button1 ).AND( button2 )
+            .IF( button1 ).AND( button2 ).AND( button3 )
             .onChange( true, *this, EVT_MAKE_PROGRESS )
             .onChange( false, *this, EVT_WRONG_MOVE );
 

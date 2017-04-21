@@ -1,10 +1,10 @@
 #include "Atm_q1_one_button.h"
-#include "Atm_main_sequence.h"
 #include "multipart_led_ribbon.h"
+#include "Atm_main_sequence.h"
 
 Atm_q1_one_button q1OneButton;
 
-Atm_q1_one_button &Atm_q1_one_button::begin() {
+Machine &Atm_q1_one_button::begin() {
     // clang-format off
     const static state_t state_table[] PROGMEM = {
             /*                           ON_ENTER  ON_LOOP  ON_EXIT  EVT_COUNTDOWN_ZERO  EVT_TIMER_TICK  EVT_MAKE_PROGRESS  EVT_WRONG_MOVE         ELSE */
@@ -51,25 +51,25 @@ void Atm_q1_one_button::action(int id) {
     switch (id) {
         case ENT_IDLE:
             timer_repeat.set(ATM_TIMER_OFF);
-            counter_progress.set(LENGTH);
+            counter_progress.set(getLength());
 
-            multipartLedRibbon.fill_sold_ext(0, LENGTH, CRGB::Black);
+            multipartLedRibbon.fill_sold_ext(this->getOffset(), getLength(), CRGB::Black);
             multipartLedRibbon.show();
             return;
         case ENT_INIT_PROGRESS:
             timer_repeat.set(50);
-            counter_progress.set(LENGTH);
+            counter_progress.set(getLength());
             return;
         case ENT_PROGRESSING:
             counter_progress.decrement();
 
-            multipartLedRibbon.fill_sold_ext(0, LENGTH - counter_progress.value, CRGB::Teal);
+            multipartLedRibbon.fill_sold_ext(this->getOffset(), getLength() - counter_progress.value, CRGB::Teal);
             multipartLedRibbon.show();
             return;
         case ENT_FINISHED:
             counter_progress.set(ATM_COUNTER_OFF);
 
-            multipartLedRibbon.fill_sold_ext(0, LENGTH, CRGB::MediumSeaGreen);
+            multipartLedRibbon.fill_sold_ext(this->getOffset(), getLength(), CRGB::MediumSeaGreen);
             multipartLedRibbon.show();
 
             main_sequence.trigger(main_sequence.EVT_SOLVED);

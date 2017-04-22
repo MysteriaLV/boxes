@@ -1,10 +1,12 @@
 #include "Atm_main_sequence.h"
 #include "multipart_led_ribbon.h"
-#include "SimpleModbusSlaveSoftwareSerial.h"
+
+extern void modbus_setup();
+extern void modbus_loop();
+extern unsigned int holdingRegs[]; // function 3 and 16 register array
+
 
 void setup() {
-    modbus_configure(57600, 3, 3, 1);
-
     multipartLedRibbon.setup();
     Serial.begin(57600);
 //    button1.trace(Serial);
@@ -23,9 +25,11 @@ void setup() {
     led5.begin( 34 );
     led6.begin( 35 );
 
+    modbus_setup();
     main_sequence.begin();
 }
 
 void loop() {
     automaton.run();
+	modbus_loop();
 }

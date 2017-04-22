@@ -9,7 +9,6 @@ extern unsigned int holdingRegs[]; // function 3 and 16 register array
 void setup() {
     multipartLedRibbon.setup();
     Serial.begin(57600);
-//    button1.trace(Serial);
 
     button1.begin(2);
     button2.begin(3);

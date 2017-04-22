@@ -5,21 +5,40 @@
 class Atm_morse_reader: public Machine {
 
  public:
-  enum { IDLE, S0, S1, S2, S3, S4, S5, S6, S7, S8, S9, FINISHED }; // STATES
-  enum { EVT_TIMEOUT, EVT_SHORT_PRESS, EVT_LONG_PRESS, ELSE }; // EVENTS
-  Atm_morse_reader( void ) : Machine() {};
-  Atm_morse_reader& begin( void );
-  Atm_morse_reader& trace( Stream & stream );
-  Atm_morse_reader& trigger( int event );
-  int state( void );
-  Atm_morse_reader& short_press( void );
-  Atm_morse_reader& long_press( void );
+	enum { IDLE, S0, S1, S2, S3, S4, S5, S6, S7, S8, S9, FINISHED }; // STATES
+	enum { EVT_TIMEOUT, EVT_SHORT_PRESS, EVT_LONG_PRESS, ELSE }; // EVENTS
+	Atm_morse_reader( void ) : Machine() {};
+	Atm_morse_reader& begin( void );
+	Atm_morse_reader& trace( Stream & stream );
+	Atm_morse_reader& trigger( int event );
+	int state( void );
+	Atm_morse_reader& short_press( void );
+	Atm_morse_reader& long_press( void );
 
  private:
-  enum { ENT_IDLE, EXT_IDLE, ENT_S0, ENT_S1, ENT_S2, ENT_S3, ENT_S4, ENT_S5, ENT_S6, ENT_S7, ENT_S8, ENT_S9, ENT_FINISHED }; // ACTIONS
-  int event( int id ); 
-  void action( int id ); 
+	enum { ENT_IDLE, EXT_IDLE, ENT_S0, ENT_S1, ENT_S2, ENT_S3, ENT_S4, ENT_S5, ENT_S6, ENT_S7, ENT_S8, ENT_S9, ENT_FINISHED }; // ACTIONS
+	int event( int id );
+	void action( int id );
 
+	virtual int getOffset() { return  80; };
+	virtual int getLength() { return 45; };
+	virtual int getNumSteps() { return 9; };
+
+	atm_timer_millis timer_timeout;
+	atm_counter counter_progress;
+
+	Atm_led dot, dash;
+	Atm_timer stepTimer;
+	Atm_step step;
+
+	const int pin = 30;
+	const int dotTime = 100;
+	const int dashTime = 500;
+	const int waitTime = 200;
+	const int longwaitTime = 300;
+	const int longerwaitTime = 1000;
+
+	const int next_press_timeout = 3000;
 };
 
 /*

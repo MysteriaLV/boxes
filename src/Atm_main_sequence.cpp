@@ -1,8 +1,8 @@
 #include "Atm_main_sequence.h"
 
 
-Atm_button button1, button2, button3, button4, button5, button6;
-Atm_led led1, led2, led3, led4, led5, led6;
+Atm_button button1, button2, button3, button4, button5, button6, button7, button8;
+Atm_led led1, led2, led3, led4, led5, led6, led7, led8;
 Atm_main_sequence main_sequence;
 
 /* Add optional parameters for the state machine to begin()

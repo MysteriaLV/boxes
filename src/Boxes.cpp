@@ -3,9 +3,8 @@
 
 extern void modbus_setup();
 extern void modbus_loop();
-extern unsigned int holdingRegs[]; // function 3 and 16 register array
 
-#define TEST_MODE
+#define MY_TEST_MODE
 Atm_timer test_mode_timer1;
 Atm_timer test_mode_timer2;
 
@@ -50,7 +49,7 @@ void setup() {
 	door7.begin(34, true);
 	door8.begin(36, true);
 
-#ifndef TEST_MODE
+#ifndef MY_TEST_MODE
 	main_sequence.begin();
 #else
 	button1.onPress(door1, door1.EVT_OFF).onRelease(door1, door1.EVT_ON).trace(Serial);

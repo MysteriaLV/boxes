@@ -52,14 +52,14 @@ void setup() {
 #ifndef MY_TEST_MODE
 	main_sequence.begin();
 #else
-	button1.onPress(door1, door1.EVT_OFF).onRelease(door1, door1.EVT_ON).trace(Serial);
-	button2.onPress(door2, door2.EVT_OFF).onRelease(door2, door2.EVT_ON);
-	button3.onPress(door3, door3.EVT_OFF).onRelease(door3, door3.EVT_ON);
-	button4.onPress(door4, door4.EVT_OFF).onRelease(door4, door4.EVT_ON);
-	button5.onPress(door5, door5.EVT_OFF).onRelease(door5, door5.EVT_ON);
-	button6.onPress(door6, door6.EVT_OFF).onRelease(door6, door6.EVT_ON);
-	button7.onPress(door7, door7.EVT_OFF).onRelease(door7, door7.EVT_ON);
-	button8.onPress(door8, door8.EVT_OFF).onRelease(door8, door8.EVT_ON);
+	button1.onPress(door2, door2.EVT_OFF).onRelease(door2, door2.EVT_ON).trace(Serial);
+	button2.onPress(door3, door3.EVT_OFF).onRelease(door3, door3.EVT_ON);
+	button3.onPress(door4, door4.EVT_OFF).onRelease(door4, door4.EVT_ON);
+	button4.onPress(door5, door5.EVT_OFF).onRelease(door5, door5.EVT_ON);
+	button5.onPress(door6, door6.EVT_OFF).onRelease(door6, door6.EVT_ON);
+	button6.onPress(door7, door7.EVT_OFF).onRelease(door7, door7.EVT_ON);
+	button7.onPress(door8, door8.EVT_OFF).onRelease(door8, door8.EVT_ON);
+	button8.onPress(door1, door1.EVT_OFF).onRelease(door1, door1.EVT_ON);
 
 	led1.blink(500).start();
 	led2.blink(500).start();

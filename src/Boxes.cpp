@@ -76,18 +76,18 @@ void setup() {
 	ufo6.blink(500, 500).start();
 	ufo7.blink(500, 500).start();
 
-//	test_mode_timer1.begin(10)
-//			.repeat(NUM_LEDS)
-//			.onTimer( [] ( int idx, int v, int up ) {
-//				multipartLedRibbon.fill_sold_ext(0, NUM_LEDS, CRGB::Gold);
-//				multipartLedRibbon.fill_sold_ext(0, v, CRGB::White);
-//				multipartLedRibbon.show();
-//			})
-//			.onFinish(test_mode_timer2, test_mode_timer1.EVT_START)
-//			.start();
-//
-//	test_mode_timer2.begin(1)
-//			.onFinish(test_mode_timer1, test_mode_timer1.EVT_START);
+	test_mode_timer1.begin(10)
+			.repeat(NUM_LEDS)
+			.onTimer( [] ( int idx, int v, int up ) {
+				multipartLedRibbon.fill_sold_ext(0, NUM_LEDS, CRGB::Gold);
+				multipartLedRibbon.fill_sold_ext(0, v, CRGB::White);
+				multipartLedRibbon.show();
+			})
+			.onFinish(test_mode_timer2, test_mode_timer1.EVT_START)
+			.start();
+
+	test_mode_timer2.begin(1)
+			.onFinish(test_mode_timer1, test_mode_timer1.EVT_START);
 #endif
 }
 

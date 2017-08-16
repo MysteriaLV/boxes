@@ -7,7 +7,7 @@ public:
     Machine &begin();
 
 protected:
-    virtual int getOffset() { return 20; };
-    virtual int getLength() { return 30; };
+    virtual int getOffset() { return 40; };
+    virtual int getLength() { return 45; };
     Atm_controller ctrl;
 };

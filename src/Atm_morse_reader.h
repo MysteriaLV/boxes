@@ -20,8 +20,8 @@ class Atm_morse_reader: public Machine {
 	int event( int id );
 	void action( int id );
 
-	virtual int getOffset() { return  80; };
-	virtual int getLength() { return 45; };
+	virtual int getOffset() { return 128; };
+	virtual int getLength() { return 43; };
 	virtual int getNumSteps() { return 9; };
 
 	atm_timer_millis timer_timeout;
@@ -31,7 +31,7 @@ class Atm_morse_reader: public Machine {
 	Atm_timer stepTimer;
 	Atm_step step;
 
-	const int pin = 30;
+	const int pin = 29;		// Led4
 	const int dotTime = 100;
 	const int dashTime = 500;
 	const int waitTime = 200;

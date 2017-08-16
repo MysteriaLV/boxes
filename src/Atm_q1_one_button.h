@@ -27,7 +27,7 @@ protected:
     void action(int id);
 
     virtual int getOffset() { return  0; };
-    virtual int getLength() { return 20; };
+    virtual int getLength() { return 40; };
 
     atm_timer_millis timer_repeat;
     atm_counter counter_progress;

@@ -4,7 +4,7 @@
 extern void modbus_setup();
 extern void modbus_loop();
 
-#define MY_TEST_MODE
+//#define MY_TEST_MODE
 Atm_timer test_mode_timer1;
 Atm_timer test_mode_timer2;
 
@@ -20,34 +20,34 @@ void setup() {
 	button5.begin(46);
 	button6.begin(48);
 	button7.begin(50);
-	// button8.begin(52);   Missing
+	button8.begin(52);
 
-	led1.begin(23, true);
-	led2.begin(25, true);
-	led3.begin(27, true);
-	led4.begin(29, true);
-	led5.begin(31, true);
-	led6.begin(33, true);
-	led7.begin(35, true);
-	led8.begin(37, true).on();  // Missing
+	led1.begin(23);
+	led2.begin(25);
+	led3.begin(27);
+	led4.begin(29);
+	led5.begin(31);
+	led6.begin(33);
+	led7.begin(35);
+	led8.begin(37);
 
-	ufo1.begin(39, true);
-	ufo2.begin(41, true);
-	ufo3.begin(43, true);
-	ufo4.begin(45, true);
-	ufo5.begin(47, true);
-	ufo6.begin(49, true);
-	ufo7.begin(51, true);
-	ufo8.begin(53, true).on();  // Missing
+	ufo1.begin(39);
+	ufo2.begin(41);
+	ufo3.begin(43);
+	ufo4.begin(45);
+	ufo5.begin(47);
+	ufo6.begin(49);
+	ufo7.begin(51);
+	ufo8.begin(53);
 
-	door1.begin(22, true).on(); // Always open
-	door2.begin(24, true);
-	door3.begin(26, true);
-	door4.begin(28, true);
-	door5.begin(30, true);
-	door6.begin(32, true);
-	door7.begin(34, true);
-	door8.begin(36, true);
+	door1.begin(22).off();
+	door2.begin(24).on();
+	door3.begin(26).on();
+	door4.begin(28).on();
+	door5.begin(30).on();
+	door6.begin(32).on();
+	door7.begin(34).on();
+	door8.begin(36).on();
 
 #ifndef MY_TEST_MODE
 	main_sequence.begin();

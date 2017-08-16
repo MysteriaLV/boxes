@@ -49,21 +49,40 @@ void Atm_main_sequence::action(int id) {
     switch (id) {
         case ENT_Q1_ONE_BUTTON:
             q1OneButton.begin();
-//            q4SingleMorseReader.begin();
+            led1.on();
+            ufo1.on();
             return;
         case ENT_Q2_TWO_BUTTONS:
             q1OneButton.sleep(ATM_SLEEP_FLAG);
+            door2.off();
+            led2.on();
+            ufo2.on();
             q2TwoButtons.begin();
             return;
         case ENT_Q3_THREE_BUTTONS:
             q2TwoButtons.sleep(ATM_SLEEP_FLAG);
+            door3.off();
+            led3.on();
+            ufo3.on();
             q3ThreeButtons.begin();
             return;
         case ENT_Q4_SINGLE_MORSE:
             q3ThreeButtons.sleep(ATM_SLEEP_FLAG);
+            led1.off();
+            ufo1.off();
+            led2.off();
+            ufo2.off();
+            led3.off();
+            ufo3.off();
+            ufo4.on();
+            door4.off();
             q4SingleMorseReader.begin();
             return;
         case ENT_Q5_MULTI_MORSE:
+            led4.off();
+            ufo4.off();
+            ufo5.on();
+            door5.off();
             return;
         case ENT_Q6_SINGLE_SNAKE:
             return;

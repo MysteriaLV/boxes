@@ -21,7 +21,7 @@ class Atm_morse_reader: public Machine {
 	void action( int id );
 
 	virtual int getOffset() { return 128; };
-	virtual int getLength() { return 43; };
+	virtual int getLength() { return 24; };
 	virtual int getNumSteps() { return 9; };
 
 	atm_timer_millis timer_timeout;

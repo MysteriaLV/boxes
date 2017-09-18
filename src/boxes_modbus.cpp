@@ -89,7 +89,7 @@ void modbus_setup() {
 	Serial.println("ModBus Slave BOXES:2 for lua/Aliens.lua");
 
 #ifndef USE_ESP8266_TCP
-	mb.config(&RS485Serial, 57600, SSerialTxControl);
+	mb.config(&RS485Serial, 31250, SSerialTxControl);
 	mb.setSlaveId(2);
 #else
 	mb.config("Aliens", "123123");

@@ -27,8 +27,8 @@ Atm_main_sequence &Atm_main_sequence::begin() {
     // clang-format on
     Machine::begin(state_table, ELSE);
 
-    trace( Serial );
-    return *this;
+	trace(Serial);
+	return *this;
 }
 
 /* Add C++ code for each internally handled event (input) 
@@ -36,9 +36,8 @@ Atm_main_sequence &Atm_main_sequence::begin() {
  */
 
 int Atm_main_sequence::event(int id) {
-    switch (id) {
-    }
-    return 0;
+	switch (id) {}
+	return 0;
 }
 
 /* Add C++ code for each action
@@ -46,51 +45,56 @@ int Atm_main_sequence::event(int id) {
  */
 
 void Atm_main_sequence::action(int id) {
-    switch (id) {
-        case ENT_Q1_ONE_BUTTON:
-            q1OneButton.begin();
-            led1.on();
-            ufo1.on();
-            return;
-        case ENT_Q2_TWO_BUTTONS:
-            q1OneButton.sleep(ATM_SLEEP_FLAG);
-            door2.off();
-            led2.on();
-            ufo2.on();
-            q2TwoButtons.begin();
-            return;
-        case ENT_Q3_THREE_BUTTONS:
-            q2TwoButtons.sleep(ATM_SLEEP_FLAG);
-            door3.off();
-            led3.on();
-            ufo3.on();
-            q3ThreeButtons.begin();
-            return;
-        case ENT_Q4_SINGLE_MORSE:
-            q3ThreeButtons.sleep(ATM_SLEEP_FLAG);
-            led1.off();
-            ufo1.off();
-            led2.off();
-            ufo2.off();
-            led3.off();
-            ufo3.off();
-            ufo4.on();
-            door4.off();
-            q4SingleMorseReader.begin();
-            return;
-        case ENT_Q5_MULTI_MORSE:
-            led4.off();
-            ufo4.off();
-            ufo5.on();
-            door5.off();
-            return;
-        case ENT_Q6_SINGLE_SNAKE:
-            return;
-        case ENT_Q7_MULTI_SNAKE:
-            return;
-        case ENT_COMPLETE:
-            return;
-    }
+	switch (id) {
+		case ENT_Q1_ONE_BUTTON:
+			q1OneButton.begin();
+			led1.on();
+			ufo1.on();
+			return;
+		case ENT_Q2_TWO_BUTTONS:
+			q1OneButton.sleep(ATM_SLEEP_FLAG);
+			door2.off();
+			led2.on();
+			ufo2.on();
+			q2TwoButtons.begin();
+			return;
+		case ENT_Q3_THREE_BUTTONS:
+			q2TwoButtons.sleep(ATM_SLEEP_FLAG);
+			door3.off();
+			led3.on();
+			ufo3.on();
+			q3ThreeButtons.begin();
+			return;
+		case ENT_Q4_SINGLE_MORSE:
+			q3ThreeButtons.sleep(ATM_SLEEP_FLAG);
+			led1.off();
+			ufo1.off();
+			led2.off();
+			ufo2.off();
+			led3.off();
+			ufo3.off();
+			ufo4.on();
+			door4.off();
+			q4SingleMorseReader.begin();
+			return;
+		case ENT_Q5_MULTI_MORSE:
+			led4.off();
+			ufo4.off();
+			ufo5.on();
+			door5.off();
+
+			// Until we all ready
+			door6.off();
+			door7.off();
+			door8.off();
+			return;
+		case ENT_Q6_SINGLE_SNAKE:
+			return;
+		case ENT_Q7_MULTI_SNAKE:
+			return;
+		case ENT_COMPLETE:
+			return;
+	}
 }
 
 /* Optionally override the default trigger() method
@@ -98,16 +102,16 @@ void Atm_main_sequence::action(int id) {
  */
 
 Atm_main_sequence &Atm_main_sequence::trigger(int event) {
-    Machine::trigger(event);
-    return *this;
+	Machine::trigger(event);
+	return *this;
 }
 
 /* Optionally override the default state() method
  * Control what the machine returns when another process requests its state
  */
 
-int Atm_main_sequence::state(void) {
-    return Machine::state();
+int Atm_main_sequence::state() {
+	return Machine::state();
 }
 
 /* Nothing customizable below this line                          
@@ -119,8 +123,8 @@ int Atm_main_sequence::state(void) {
  */
 
 Atm_main_sequence &Atm_main_sequence::solved() {
-    trigger(EVT_SOLVED);
-    return *this;
+	trigger(EVT_SOLVED);
+	return *this;
 }
 
 /* State trace method
@@ -128,9 +132,9 @@ Atm_main_sequence &Atm_main_sequence::solved() {
  */
 
 Atm_main_sequence &Atm_main_sequence::trace(Stream &stream) {
-    Machine::setTrace(&stream, atm_serial_debug::trace,
-                      "MAIN_SEQUENCE\0EVT_SOLVED\0ELSE\0Q1_ONE_BUTTON\0Q2_TWO_BUTTONS\0Q3_THREE_BUTTONS\0Q4_SINGLE_MORSE\0Q5_MULTI_MORSE\0Q6_SINGLE_SNAKE\0Q7_MULTI_SNAKE\0COMPLETE");
-    return *this;
+	Machine::setTrace(&stream, atm_serial_debug::trace,
+	                  "MAIN_SEQUENCE\0EVT_SOLVED\0ELSE\0Q1_ONE_BUTTON\0Q2_TWO_BUTTONS\0Q3_THREE_BUTTONS\0Q4_SINGLE_MORSE\0Q5_MULTI_MORSE\0Q6_SINGLE_SNAKE\0Q7_MULTI_SNAKE\0COMPLETE");
+	return *this;
 }
 
 

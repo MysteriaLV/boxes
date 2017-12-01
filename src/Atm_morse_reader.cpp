@@ -124,7 +124,7 @@ Atm_morse_reader &Atm_morse_reader::trigger(int event) {
  * Control what the machine returns when another process requests its state
  */
 
-int Atm_morse_reader::state(void) {
+int Atm_morse_reader::state() {
 	return Machine::state();
 }
 

@@ -5,6 +5,7 @@ extern void modbus_setup();
 extern void modbus_loop();
 
 //#define MY_TEST_MODE
+//#define MY_EASY_MODE
 Atm_timer test_mode_timer1;
 Atm_timer test_mode_timer2;
 
@@ -13,14 +14,14 @@ void setup() {
 	modbus_setup();
 	multipartLedRibbon.setup();
 
-	button1.begin(38);
-	button2.begin(40);
-	button3.begin(42);
-	button4.begin(44);
-	button5.begin(46);
-	button6.begin(48);
-	button7.begin(50);
-	button8.begin(52);
+	button1.debounce(30).begin(38);
+	button2.debounce(30).begin(40);
+	button3.debounce(30).begin(42);
+	button4.debounce(30).begin(44);
+	button5.debounce(30).begin(46);
+	button6.debounce(30).begin(48);
+	button7.debounce(30).begin(50);
+	button8.debounce(30).begin(52);
 
 	led1.begin(23);
 	led2.begin(25);

@@ -7,6 +7,6 @@ public:
     Machine &begin();
 
 protected:
-    virtual int getOffset() { return 85; };
-    virtual int getLength() { return 43; };
+	virtual int getOffset() { return Q3_START; };
+	virtual int getLength() { return Q4_START - Q3_START; };
 };

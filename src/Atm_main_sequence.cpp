@@ -19,8 +19,8 @@ Atm_main_sequence &Atm_main_sequence::begin() {
             /*   Q2_TWO_BUTTONS */   ENT_Q2_TWO_BUTTONS,      -1,      -1, Q3_THREE_BUTTONS,   -1,
             /* Q3_THREE_BUTTONS */ ENT_Q3_THREE_BUTTONS,      -1,      -1,  Q4_SINGLE_MORSE,   -1,
             /*  Q4_SINGLE_MORSE */  ENT_Q4_SINGLE_MORSE,      -1,      -1,   Q5_MULTI_MORSE,   -1,
-            /*   Q5_MULTI_MORSE */   ENT_Q5_MULTI_MORSE,      -1,      -1,  Q6_SINGLE_SNAKE,   -1,
-            /*  Q6_SINGLE_SNAKE */  ENT_Q6_SINGLE_SNAKE,      -1,      -1,   Q7_MULTI_SNAKE,   -1,
+            /*   Q5_MULTI_MORSE */   ENT_Q5_MULTI_MORSE,      -1,      -1,   Q6_WHAC_A_MOLE,   -1,
+            /*  Q6_WHAC_A_MOLE  */  ENT_Q6_WHAC_A_MOLE,       -1,      -1,   Q7_MULTI_SNAKE,   -1,
             /*   Q7_MULTI_SNAKE */   ENT_Q7_MULTI_SNAKE,      -1,      -1,         COMPLETE,   -1,
             /*         COMPLETE */         ENT_COMPLETE,      -1,      -1,               -1,   -1,
     };
@@ -36,7 +36,6 @@ Atm_main_sequence &Atm_main_sequence::begin() {
  */
 
 int Atm_main_sequence::event(int id) {
-	switch (id) {}
 	return 0;
 }
 
@@ -83,16 +82,17 @@ void Atm_main_sequence::action(int id) {
 			ufo5.on();
 			door5.off();
 
-			// Until we all ready
-			door6.off();
-			door7.off();
-			door8.off();
+			q6WhacAMole.begin();
 			return;
-		case ENT_Q6_SINGLE_SNAKE:
+		case ENT_Q6_WHAC_A_MOLE:
+			q6WhacAMole.sleep(ATM_SLEEP_FLAG);
+			door6.off();
 			return;
 		case ENT_Q7_MULTI_SNAKE:
+			door7.off();
 			return;
 		case ENT_COMPLETE:
+			door8.off();
 			return;
 	}
 }

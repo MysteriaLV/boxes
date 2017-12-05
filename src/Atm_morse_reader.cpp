@@ -27,7 +27,6 @@ Atm_morse_reader &Atm_morse_reader::begin() {
 	// clang-format on
 	Machine::begin(state_table, ELSE);
 
-	button4.debounce(30);
 	button4.longPress(2, 600)
 			.onPress(1, *this, this->EVT_SHORT_PRESS)  // Short press
 			.onPress(2, *this, this->EVT_LONG_PRESS); // Long press

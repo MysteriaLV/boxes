@@ -5,11 +5,12 @@
 #include "Atm_q2_two_buttons.h"
 #include "Atm_q3_three_buttons.h"
 #include "Atm_morse_reader.h"
+#include "Atm_whac_a_mole.h"
 
 class Atm_main_sequence: public Machine {
 
  public:
-  enum { Q1_ONE_BUTTON, Q2_TWO_BUTTONS, Q3_THREE_BUTTONS, Q4_SINGLE_MORSE, Q5_MULTI_MORSE, Q6_SINGLE_SNAKE, Q7_MULTI_SNAKE, COMPLETE }; // STATES
+  enum { Q1_ONE_BUTTON, Q2_TWO_BUTTONS, Q3_THREE_BUTTONS, Q4_SINGLE_MORSE, Q5_MULTI_MORSE, Q6_WHAC_A_MOLE, Q7_MULTI_SNAKE, COMPLETE }; // STATES
   enum { EVT_SOLVED, ELSE }; // EVENTS
   Atm_main_sequence( void ) : Machine() {};
   Atm_main_sequence& begin( void );
@@ -19,7 +20,7 @@ class Atm_main_sequence: public Machine {
   Atm_main_sequence& solved( void );
 
  private:
-  enum { ENT_Q1_ONE_BUTTON, ENT_Q2_TWO_BUTTONS, ENT_Q3_THREE_BUTTONS, ENT_Q4_SINGLE_MORSE, ENT_Q5_MULTI_MORSE, ENT_Q6_SINGLE_SNAKE, ENT_Q7_MULTI_SNAKE, ENT_COMPLETE }; // ACTIONS
+  enum { ENT_Q1_ONE_BUTTON, ENT_Q2_TWO_BUTTONS, ENT_Q3_THREE_BUTTONS, ENT_Q4_SINGLE_MORSE, ENT_Q5_MULTI_MORSE, ENT_Q6_WHAC_A_MOLE, ENT_Q7_MULTI_SNAKE, ENT_COMPLETE }; // ACTIONS
   int event( int id ); 
   void action( int id ); 
 
@@ -33,6 +34,7 @@ extern Atm_q1_one_button q1OneButton;
 extern Atm_q2_two_buttons q2TwoButtons;
 extern Atm_q3_three_buttons q3ThreeButtons;
 extern Atm_morse_reader q4SingleMorseReader;
+extern Atm_whac_a_mole q6WhacAMole;
 extern Atm_main_sequence main_sequence;
 
 /*
@@ -55,11 +57,11 @@ Automaton::ATML::begin - Automaton Markup Language
         <EVT_SOLVED>Q5_MULTI_MORSE</EVT_SOLVED>
       </Q4_SINGLE_MORSE>
       <Q5_MULTI_MORSE index="4" on_enter="ENT_Q5_MULTI_MORSE">
-        <EVT_SOLVED>Q6_SINGLE_SNAKE</EVT_SOLVED>
+        <EVT_SOLVED>Q6_WHAC_A_MOLE</EVT_SOLVED>
       </Q5_MULTI_MORSE>
-      <Q6_SINGLE_SNAKE index="5" on_enter="ENT_Q6_SINGLE_SNAKE">
+      <Q6_WHAC_A_MOLE index="5" on_enter="ENT_Q6_WHAC_A_MOLE">
         <EVT_SOLVED>Q7_MULTI_SNAKE</EVT_SOLVED>
-      </Q6_SINGLE_SNAKE>
+      </Q6_WHAC_A_MOLE>
       <Q7_MULTI_SNAKE index="6" on_enter="ENT_Q7_MULTI_SNAKE">
         <EVT_SOLVED>COMPLETE</EVT_SOLVED>
       </Q7_MULTI_SNAKE>

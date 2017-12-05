@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Automaton.h>
+#include "ribbon_dimensions.h"
 
 class Atm_q1_one_button : public Machine {
 
@@ -26,8 +27,8 @@ protected:
     int event(int id);
     void action(int id);
 
-    virtual int getOffset() { return  0; };
-    virtual int getLength() { return 40; };
+    virtual int getOffset() { return Q1_START; };
+    virtual int getLength() { return Q2_START - Q1_START; };
 
     atm_timer_millis timer_repeat;
     atm_counter counter_progress;

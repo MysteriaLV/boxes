@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Automaton.h>
+#include "ribbon_dimensions.h"
 
 class Atm_morse_reader: public Machine {
 
@@ -20,12 +21,14 @@ class Atm_morse_reader: public Machine {
 	int event( int id ) override;
 	void action( int id ) override;
 
-	virtual int getOffset() { return 128; };
-	virtual int getLength() { return 24; };
-	virtual uint16_t getNumSteps() { return 9; };
+	virtual int getOffset() { return Q4_START; };
+	virtual int getLength() { return (Q5_START - Q4_START) / 2; };
 
-	atm_timer_millis timer_timeout{};
+	virtual uint16_t getNumSteps() { return 9; };
+	uint32_t next_press_timeout = 3000;
+
 	atm_counter counter_progress{};
+	atm_timer_millis timer_timeout{};
 
 	Atm_led dot, dash;
 	Atm_timer stepTimer;
@@ -37,8 +40,6 @@ class Atm_morse_reader: public Machine {
 	const int waitTime = 200;
 	uint32_t longwaitTime = 300;
 	const int longerwaitTime = 1000;
-
-	uint32_t next_press_timeout = 3000;
 };
 
 /*

@@ -77,18 +77,20 @@ void Atm_main_sequence::action(int id) {
 			q4SingleMorseReader.begin();
 			return;
 		case ENT_Q5_MULTI_MORSE:
+			q4SingleMorseReader.sleep(ATM_SLEEP_FLAG);
 			led4.off();
 			ufo4.off();
 			ufo5.on();
 			door5.off();
-
-			q6WhacAMole.begin();
+			q5multiMorseReader.begin();
 			return;
 		case ENT_Q6_WHAC_A_MOLE:
-			q6WhacAMole.sleep(ATM_SLEEP_FLAG);
+			q5multiMorseReader.sleep(ATM_SLEEP_FLAG);
 			door6.off();
+			q6WhacAMole.begin();
 			return;
 		case ENT_Q7_MULTI_SNAKE:
+			q6WhacAMole.sleep(ATM_SLEEP_FLAG);
 			door7.off();
 			return;
 		case ENT_COMPLETE:

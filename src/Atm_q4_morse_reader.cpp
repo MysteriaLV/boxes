@@ -1,4 +1,4 @@
-#include "Atm_morse_reader.h"
+#include "Atm_q4_morse_reader.h"
 #include "multipart_led_ribbon.h"
 #include "Atm_main_sequence.h"
 
@@ -31,7 +31,6 @@ Atm_morse_reader &Atm_morse_reader::begin() {
 			.onPress(1, *this, this->EVT_SHORT_PRESS)  // Short press
 			.onPress(2, *this, this->EVT_LONG_PRESS); // Long press
 
-//  button1.trace(Serial);
 	trace(Serial);
 	return *this;
 }

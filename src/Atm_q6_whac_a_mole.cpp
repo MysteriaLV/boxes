@@ -1,4 +1,4 @@
-#include "Atm_whac_a_mole.h"
+#include "Atm_q6_whac_a_mole.h"
 #include "Atm_main_sequence.h"
 #include "multipart_led_ribbon.h"
 

@@ -7,6 +7,7 @@
 #include "Atm_q4_morse_reader.h"
 #include "Atm_q5_multi_morse_reader.h"
 #include "Atm_q6_whac_a_mole.h"
+#include "Atm_q7_running_light.h"
 
 class Atm_main_sequence: public Machine {
 
@@ -37,6 +38,7 @@ extern Atm_q3_three_buttons q3ThreeButtons;
 extern Atm_morse_reader q4SingleMorseReader;
 extern Atm_multi_morse_reader q5multiMorseReader;
 extern Atm_whac_a_mole q6WhacAMole;
+extern Atm_running_light q7RunningLight;
 extern Atm_main_sequence main_sequence;
 
 /*

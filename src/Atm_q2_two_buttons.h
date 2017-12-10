@@ -7,7 +7,7 @@ public:
 	Machine &begin();
 
 protected:
-	virtual int getOffset() { return Q2_START; };
-	virtual int getLength() { return Q3_START - Q2_START; };
+	virtual uint16_t getOffset() { return Q2_START; };
+	virtual uint16_t getLength() { return Q3_START - Q2_START; };
 	Atm_controller ctrl;
 };

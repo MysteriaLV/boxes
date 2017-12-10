@@ -14,8 +14,8 @@ public:
 	Atm_whac_a_mole& trigger( int event );
 	int state( void );
 
-	virtual int getOffset() { return Q6_START; };
-	virtual int getLength() { return (Q6_START - Q5_START) / 2; };
+	virtual uint16_t getOffset() { return Q6_START; };
+	virtual uint16_t getLength() { return (Q6_START - Q5_START) / 2; };
 
 	atm_counter counter_progress{};
 

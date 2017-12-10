@@ -14,10 +14,10 @@ public:
     Atm_q1_one_button &trace(Stream &stream);
     Atm_q1_one_button &trigger(int event);
     int state(void);
-    Atm_q1_one_button &onFinished(Machine &machine, int event = 0);
-    Atm_q1_one_button &onFinished(atm_cb_push_t callback, int idx = 0);
-    Atm_q1_one_button &make_progress(void);
-    Atm_q1_one_button &wrong_move(void);
+//    Atm_q1_one_button &onFinished(Machine &machine, int event = 0);
+//    Atm_q1_one_button &onFinished(atm_cb_push_t callback, int idx = 0);
+//    Atm_q1_one_button &make_progress(void);
+//    Atm_q1_one_button &wrong_move(void);
 
 protected:
     enum { ENT_IDLE, ENT_INIT_PROGRESS, ENT_PROGRESSING, ENT_FINISHED }; // ACTIONS
@@ -27,8 +27,8 @@ protected:
     int event(int id);
     void action(int id);
 
-    virtual int getOffset() { return Q1_START; };
-    virtual int getLength() { return Q2_START - Q1_START; };
+    virtual uint16_t getOffset() { return Q1_START; };
+    virtual uint16_t getLength() { return Q2_START - Q1_START; };
 
     atm_timer_millis timer_repeat;
     atm_counter counter_progress;

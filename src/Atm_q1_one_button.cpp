@@ -98,33 +98,33 @@ int Atm_q1_one_button::state(void) {
  ************************************************************************************************
 */
 
-/* Public event methods
- *
- */
-
-Atm_q1_one_button &Atm_q1_one_button::make_progress() {
-    trigger(EVT_MAKE_PROGRESS);
-    return *this;
-}
-
-Atm_q1_one_button &Atm_q1_one_button::wrong_move() {
-    trigger(EVT_WRONG_MOVE);
-    return *this;
-}
-
-/*
- * onFinished() push connector variants ( slots 1, autostore 0, broadcast 0 )
- */
-
-Atm_q1_one_button &Atm_q1_one_button::onFinished(Machine &machine, int event) {
-    onPush(connectors, ON_FINISHED, 0, 1, 1, machine, event);
-    return *this;
-}
-
-Atm_q1_one_button &Atm_q1_one_button::onFinished(atm_cb_push_t callback, int idx) {
-    onPush(connectors, ON_FINISHED, 0, 1, 1, callback, idx);
-    return *this;
-}
+///* Public event methods
+// *
+// */
+//
+//Atm_q1_one_button &Atm_q1_one_button::make_progress() {
+//    trigger(EVT_MAKE_PROGRESS);
+//    return *this;
+//}
+//
+//Atm_q1_one_button &Atm_q1_one_button::wrong_move() {
+//    trigger(EVT_WRONG_MOVE);
+//    return *this;
+//}
+//
+///*
+// * onFinished() push connector variants ( slots 1, autostore 0, broadcast 0 )
+// */
+//
+//Atm_q1_one_button &Atm_q1_one_button::onFinished(Machine &machine, int event) {
+//    onPush(connectors, ON_FINISHED, 0, 1, 1, machine, event);
+//    return *this;
+//}
+//
+//Atm_q1_one_button &Atm_q1_one_button::onFinished(atm_cb_push_t callback, int idx) {
+//    onPush(connectors, ON_FINISHED, 0, 1, 1, callback, idx);
+//    return *this;
+//}
 
 /* State trace method
  * Sets the symbol table and the default logging method for serial monitoring

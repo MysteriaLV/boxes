@@ -19,8 +19,8 @@ private:
 	int event( int id );
 	void action( int id );
 
-	virtual int getOffset() { return Q5_START; };
-	virtual int getLength() { return (Q6_START - Q5_START) / 2; };
+	virtual uint16_t getOffset() { return Q5_START; };
+	virtual uint16_t getLength() { return (Q6_START - Q5_START) / 2; };
 
 	virtual uint16_t getNumSteps() { return 5; };
 	uint32_t next_press_timeout = 3000;
@@ -28,8 +28,6 @@ private:
 	atm_counter counter_progress{};
 	atm_timer_millis timer_timeout{};
 
-	Atm_timer stepTimer;
-	Atm_step step;
 };
 
 /*

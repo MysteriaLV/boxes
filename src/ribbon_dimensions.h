@@ -13,6 +13,8 @@
 	#define Q5_START 160
 	#define Q6_START 200
 	#define Q7_START 240
+	#define Q8_START 270
+	#define Q_LAST_LED 300
 #else
 	#define Q1_START 0
 	#define Q2_START 15

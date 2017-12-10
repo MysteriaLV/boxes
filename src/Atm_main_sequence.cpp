@@ -92,9 +92,27 @@ void Atm_main_sequence::action(int id) {
 		case ENT_Q7_MULTI_SNAKE:
 			q6WhacAMole.sleep(ATM_SLEEP_FLAG);
 			door7.off();
+			q7RunningLight.begin();
 			return;
 		case ENT_COMPLETE:
+			q7RunningLight.sleep(ATM_SLEEP_FLAG);
 			door8.off();
+			led1.off();
+			ufo1.off();
+			led2.off();
+			ufo2.off();
+			led3.off();
+			ufo3.off();
+			led4.off();
+			ufo4.off();
+			led5.off();
+			ufo5.off();
+			led6.off();
+			ufo6.off();
+			led7.off();
+			ufo7.off();
+			led8.off();
+			ufo8.off();
 			return;
 	}
 }

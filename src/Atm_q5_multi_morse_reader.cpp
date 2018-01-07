@@ -33,7 +33,7 @@ Atm_multi_morse_reader &Atm_multi_morse_reader::begin() {
 	button4.onPress(*this, this->EVT_BTN4_PRESSED);
 	button5.onPress(*this, this->EVT_BTN5_PRESSED);
 
-	trace(Serial);
+//	trace(Serial);
 	return *this;
 }
 

@@ -36,7 +36,7 @@ Atm_running_light &Atm_running_light::begin() {
 	button6.onPress(*this, this->EVT_BTN6_PRESSED);
 	button7.onPress(*this, this->EVT_BTN7_PRESSED);
 
-	trace(Serial);
+//	trace(Serial);
 	return *this;
 }
 

@@ -34,7 +34,7 @@ Atm_whac_a_mole &Atm_whac_a_mole::begin() {
 	button5.onPress(*this, this->EVT_BTN5_PRESSED);
 	button6.onPress(*this, this->EVT_BTN6_PRESSED);
 
-    trace(Serial);
+//    trace(Serial);
 	trigger(EVT_TIMEOUT);
 	return *this;
 }

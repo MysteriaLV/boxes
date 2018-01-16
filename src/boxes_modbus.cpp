@@ -1,6 +1,7 @@
 #define USE_HOLDING_REGISTERS_ONLY
-
 #include <Arduino.h>
+
+#ifndef SKIP_MODBUS
 #include <Modbus.h>
 
 extern void modbus_setup();
@@ -125,3 +126,12 @@ void modbus_loop() {
 	mb.task();              // not implemented yet: mb.Hreg(TOTAL_ERRORS, mb.task());
 	process_actions();
 }
+
+#else
+void modbus_setup() {
+	Serial.println("ModBus Disabled");
+}
+
+
+void modbus_loop() { }
+#endif

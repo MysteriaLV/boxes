@@ -77,11 +77,16 @@ void setup() {
 	ufo6.blink(500, 500).start();
 	ufo7.blink(500, 500).start();
 
-	test_mode_timer1.begin(10)
+	test_mode_timer1.begin(1000)
 			.repeat(NUM_LEDS)
 			.onTimer( [] ( int idx, int v, int up ) {
-				multipartLedRibbon.fill_sold_ext(0, NUM_LEDS, CRGB::Gold);
-				multipartLedRibbon.fill_sold_ext(0, v, CRGB::White);
+                if (v % 3 == 1)
+				    multipartLedRibbon.fill_sold_ext(0, NUM_LEDS, CRGB::Red);
+				else if (v % 3 == 2)
+				    multipartLedRibbon.fill_sold_ext(0, NUM_LEDS, CRGB::Green);
+				else
+				    multipartLedRibbon.fill_sold_ext(0, NUM_LEDS, CRGB::Blue);
+//				multipartLedRibbon.fill_sold_ext(0, v, CRGB::White);
 				multipartLedRibbon.show();
 			})
 			.onFinish(test_mode_timer2, test_mode_timer1.EVT_START)

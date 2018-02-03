@@ -20,7 +20,7 @@ public:
 	atm_counter counter_progress{};
 
 #ifdef MY_EASY_MODE
-	virtual uint16_t getNumSteps() { return 2; };
+	virtual uint16_t getNumSteps() { return 3; };
 	uint32_t next_press_timeout = 10000;
 #else
 	virtual uint16_t getNumSteps() { return 10; };

@@ -12,7 +12,7 @@ Atm_main_sequence main_sequence;
  */
 
 Atm_main_sequence &Atm_main_sequence::begin() {
-    // clang-format off
+// clang-format off
     const static state_t state_table[] PROGMEM = {
             /*                                 ON_ENTER  ON_LOOP  ON_EXIT        EVT_SOLVED  ELSE */
             /*    Q1_ONE_BUTTON */    ENT_Q1_ONE_BUTTON,      -1,      -1,   Q2_TWO_BUTTONS,   -1,
@@ -24,7 +24,7 @@ Atm_main_sequence &Atm_main_sequence::begin() {
             /*   Q7_MULTI_SNAKE */   ENT_Q7_MULTI_SNAKE,      -1,      -1,         COMPLETE,   -1,
             /*         COMPLETE */         ENT_COMPLETE,      -1,      -1,               -1,   -1,
     };
-    // clang-format on
+// clang-format on
     Machine::begin(state_table, ELSE);
 
 	trace(Serial);
@@ -86,7 +86,9 @@ void Atm_main_sequence::action(int id) {
 			return;
 		case ENT_Q6_WHAC_A_MOLE:
 			q5multiMorseReader.sleep(ATM_SLEEP_FLAG);
-			door6.off();
+            ufo5.off();
+            door6.off();
+            ufo6.on();
 			q6WhacAMole.begin();
 			return;
 		case ENT_Q7_MULTI_SNAKE:

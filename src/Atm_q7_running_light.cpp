@@ -30,16 +30,16 @@ Atm_running_light &Atm_running_light::begin() {
   // clang-format on
 	Machine::begin(state_table, ELSE);
 
-	button1.onPress(*this, this->EVT_BTN1_PRESSED);
-	button2.onPress(*this, this->EVT_BTN2_PRESSED);
-	button3.onPress(*this, this->EVT_BTN3_PRESSED);
-	button4.onPress(*this, this->EVT_BTN4_PRESSED);
-	button5.onPress(*this, this->EVT_BTN5_PRESSED);
-	button6.onPress(*this, this->EVT_BTN6_PRESSED);
-	button7.onPress(*this, this->EVT_BTN7_PRESSED);
+    button1.onPress(*this, this->EVT_BTN1_PRESSED);
+    button2.onPress(*this, this->EVT_BTN2_PRESSED);
+    button3.onPress(*this, this->EVT_BTN3_PRESSED);
+    button4.onPress(*this, this->EVT_BTN4_PRESSED);
+    button5.onPress(*this, this->EVT_BTN5_PRESSED);
+    button6.onPress(*this, this->EVT_BTN6_PRESSED);
+    button7.onPress(*this, this->EVT_BTN7_PRESSED);
 
-	trace(Serial);
-	return *this;
+//    trace(Serial);
+    return *this;
 }
 
 /* Add C++ code for each internally handled event (input)
@@ -47,26 +47,26 @@ Atm_running_light &Atm_running_light::begin() {
  */
 
 int Atm_running_light::event(int id) {
-	switch (id) {
-		case EVT_ZONE1:
-			return getLength() - tick_reverse_location.value == BTN1_POSITION + 2;      // Magic number so we don't miss point 0
-		case EVT_ZONE2:
-            return getLength() - tick_reverse_location.value == BTN2_POSITION - SPOT_WIDTH / 2;
+    switch (id) {
+        case EVT_ZONE1:
+            return calculatePosition() == BTN1_POSITION;
+        case EVT_ZONE2:
+            return calculatePosition() == BTN2_POSITION - SPOT_WIDTH / 2;
         case EVT_ZONE3:
-            return getLength() - tick_reverse_location.value == BTN3_POSITION - SPOT_WIDTH / 2;
+            return calculatePosition() == BTN3_POSITION - SPOT_WIDTH / 2;
         case EVT_ZONE4:
-            return getLength() - tick_reverse_location.value == BTN4_POSITION - SPOT_WIDTH / 2;
+            return calculatePosition() == BTN4_POSITION - SPOT_WIDTH / 2;
         case EVT_ZONE5:
-            return getLength() - tick_reverse_location.value == BTN5_POSITION - SPOT_WIDTH / 2;
+            return calculatePosition() == BTN5_POSITION - SPOT_WIDTH / 2;
         case EVT_ZONE6:
-            return getLength() - tick_reverse_location.value == BTN6_POSITION - SPOT_WIDTH / 2;
+            return calculatePosition() == BTN6_POSITION - SPOT_WIDTH / 2;
         case EVT_ZONE7:
-            return getLength() - tick_reverse_location.value == BTN7_POSITION - SPOT_WIDTH / 2;
+            return calculatePosition() == BTN7_POSITION - SPOT_WIDTH / 2;
         case EVT_TIMEOUT:
-			return timer_timeout.expired(this);
-		default:
-			return 0;
-	}
+            return timer_timeout.expired(this);
+        default:
+            return 0;
+    }
 }
 
 /* Add C++ code for each action
@@ -74,128 +74,137 @@ int Atm_running_light::event(int id) {
  */
 
 void Atm_running_light::action(int id) {
-	switch (id) {
-		case ENT_INIT:
-			multipartLedRibbon.fill_sold_ext(getOffset(), getLength(), CRGB::MediumSeaGreen);
-			multipartLedRibbon.show();
+    switch (id) {
+        case ENT_INIT:
+            multipartLedRibbon.fill_sold_ext(getOffset(), getLength(), CRGB::MediumSeaGreen);
+            multipartLedRibbon.show();
 
-			led1.off();
-			led2.off();
-			led3.off();
-			led4.off();
-			led5.off();
-			led6.off();
-			led7.off();
+            led1.off();
+            led2.off();
+            led3.off();
+            led4.off();
+            led5.off();
+            led6.off();
+            led7.off();
 
-			ufo1.off();
-			ufo2.off();
-			ufo3.off();
-			ufo4.off();
-			ufo5.off();
-			ufo6.off();
-			ufo7.off();
+            ufo1.off();
+            ufo2.off();
+            ufo3.off();
+            ufo4.off();
+            ufo5.off();
+            ufo6.off();
+            ufo7.off();
 
-			tick_reverse_location.set(getLength());
-			counter_progress.set(7);
-			return;
-		case ENT_RUNNING:
-			multipartLedRibbon.fill_sold_ext(getLength() - tick_reverse_location.value, SPOT_WIDTH, CRGB::MediumSeaGreen);
-			tick_reverse_location.decrement();
-			multipartLedRibbon.fill_sold_ext(getLength() - tick_reverse_location.value, SPOT_WIDTH, CRGB::Red);
-			multipartLedRibbon.show();
+            tick_reverse_location.set(getLength());
+            counter_progress.set(7);
+            return;
+        case ENT_RUNNING:
+            multipartLedRibbon.fill_sold_ext(calculatePosition(), SPOT_WIDTH, CRGB::MediumSeaGreen);
+            tick_reverse_location.decrement();
+            multipartLedRibbon.fill_sold_ext(calculatePosition(), SPOT_WIDTH, CRGB::Red);
+            multipartLedRibbon.show();
 
-			timer_timeout.set(next_tick_timeout);
-			return;
-		case ENT_ZONE1:
-			timer_timeout.set(next_press_timeout);
+            timer_timeout.set(next_tick_timeout);
+            return;
+        case ENT_ZONE1:
+            timer_timeout.set(next_press_timeout);
             currentLed = &led1;
             currentUfo = &ufo1;
             return;
-		case EXT_ZONE1:
-			return;
-		case ENT_ZONE2:
-			timer_timeout.set(next_press_timeout);
+        case EXT_ZONE1:
+            return;
+        case ENT_ZONE2:
+            timer_timeout.set(next_press_timeout);
             currentLed = &led2;
             currentUfo = &ufo2;
-			return;
-		case EXT_ZONE2:
-			return;
-		case ENT_ZONE3:
-			timer_timeout.set(next_press_timeout);
+            return;
+        case EXT_ZONE2:
+            return;
+        case ENT_ZONE3:
+            timer_timeout.set(next_press_timeout);
             currentLed = &led3;
             currentUfo = &ufo3;
-			return;
-		case EXT_ZONE3:
-			return;
-		case ENT_ZONE4:
-			timer_timeout.set(next_press_timeout);
+            return;
+        case EXT_ZONE3:
+            return;
+        case ENT_ZONE4:
+            timer_timeout.set(next_press_timeout);
             currentLed = &led4;
             currentUfo = &ufo4;
-			return;
-		case EXT_ZONE4:
-			return;
-		case ENT_ZONE5:
-			timer_timeout.set(next_press_timeout);
+            return;
+        case EXT_ZONE4:
+            return;
+        case ENT_ZONE5:
+            timer_timeout.set(next_press_timeout);
             currentLed = &led5;
             currentUfo = &ufo5;
-			return;
-		case EXT_ZONE5:
-			return;
-		case ENT_ZONE6:
-			timer_timeout.set(next_press_timeout);
+            return;
+        case EXT_ZONE5:
+            return;
+        case ENT_ZONE6:
+            timer_timeout.set(next_press_timeout);
             currentLed = &led6;
             currentUfo = &ufo6;
-			return;
-		case EXT_ZONE6:
-			return;
-		case ENT_ZONE7:
-			timer_timeout.set(next_press_timeout);
+            return;
+        case EXT_ZONE6:
+            return;
+        case ENT_ZONE7:
+            timer_timeout.set(next_press_timeout);
             currentLed = &led7;
             currentUfo = &ufo7;
-			return;
-		case EXT_ZONE7:
-			return;
-		case ENT_CORRECT:
+            return;
+        case EXT_ZONE7:
+            return;
+        case ENT_CORRECT:
             currentLed->on();
             currentUfo->on();
-			counter_progress.decrement();
-			return;
-		case ENT_INCORRECT:
-			return;
-		case ENT_FINISHED:
-			counter_progress.decrement();
-			if (!counter_progress.expired()) {
-				// Correct last answer due to transition, but not whole 7
-				state(INIT);
-				return;
-			}
+            counter_progress.decrement();
+            return;
+        case ENT_INCORRECT:
+            return;
+        case ENT_FINISHED:
+            counter_progress.decrement();
+            if (!counter_progress.expired()) {
+                // Correct last answer due to transition, but not whole 7
+                state(INIT);
+                return;
+            }
 
-			timer_timeout.set(ATM_TIMER_OFF);
-			counter_progress.set(ATM_COUNTER_OFF);
-			led1.off();
-			led2.off();
-			led3.off();
-			led4.off();
-			led5.off();
-			led6.off();
-			led7.off();
+            timer_timeout.set(ATM_TIMER_OFF);
+            counter_progress.set(ATM_COUNTER_OFF);
+            led1.off();
+            led2.off();
+            led3.off();
+            led4.off();
+            led5.off();
+            led6.off();
+            led7.off();
 
-			ufo1.off();
-			ufo2.off();
-			ufo3.off();
-			ufo4.off();
-			ufo5.off();
-			ufo6.off();
-			ufo7.off();
+            ufo1.off();
+            ufo2.off();
+            ufo3.off();
+            ufo4.off();
+            ufo5.off();
+            ufo6.off();
+            ufo7.off();
 
-			multipartLedRibbon.fill_sold_ext(getOffset(), getLength(), CRGB::BlueViolet);
-			multipartLedRibbon.show();
+            multipartLedRibbon.fill_sold_ext(getOffset(), getLength(), CRGB::BlueViolet);
+            multipartLedRibbon.show();
 
-			main_sequence.trigger(main_sequence.EVT_SOLVED);
-			return;
-		default:
-			break;
-	}
+            main_sequence.trigger(main_sequence.EVT_SOLVED);
+            return;
+        default:
+            break;
+    }
+}
+
+uint16_t Atm_running_light::calculatePosition() {
+    uint16_t maxLocation = (uint16_t) (Q7_START);
+    uint16_t position = maxLocation - tick_reverse_location.value;
+    if (maxLocation < tick_reverse_location.value)
+        position = (uint16_t) (Q_LAST_LED + Q7_START - tick_reverse_location.value);
+
+    return position;
 }
 
 /* State trace method
@@ -203,8 +212,8 @@ void Atm_running_light::action(int id) {
  */
 
 Atm_running_light &Atm_running_light::trace(Stream &stream) {
-	Machine::setTrace(&stream, atm_serial_debug::trace,
-	                  "RUNNING_LIGHT\0EVT_ZONE1\0EVT_ZONE2\0EVT_ZONE3\0EVT_ZONE4\0EVT_ZONE5\0EVT_ZONE6\0EVT_ZONE7\0EVT_TIMEOUT\0EVT_BTN1_PRESSED\0EVT_BTN2_PRESSED\0EVT_BTN3_PRESSED\0EVT_BTN4_PRESSED\0EVT_BTN5_PRESSED\0EVT_BTN6_PRESSED\0EVT_BTN7_PRESSED\0ELSE\0INIT\0RUNNING\0ZONE1\0ZONE2\0ZONE3\0ZONE4\0ZONE5\0ZONE6\0ZONE7\0CORRECT\0INCORRECT\0FINISHED");
-	return *this;
+    Machine::setTrace(&stream, atm_serial_debug::trace,
+                      "RUNNING_LIGHT\0EVT_ZONE1\0EVT_ZONE2\0EVT_ZONE3\0EVT_ZONE4\0EVT_ZONE5\0EVT_ZONE6\0EVT_ZONE7\0EVT_TIMEOUT\0EVT_BTN1_PRESSED\0EVT_BTN2_PRESSED\0EVT_BTN3_PRESSED\0EVT_BTN4_PRESSED\0EVT_BTN5_PRESSED\0EVT_BTN6_PRESSED\0EVT_BTN7_PRESSED\0ELSE\0INIT\0RUNNING\0ZONE1\0ZONE2\0ZONE3\0ZONE4\0ZONE5\0ZONE6\0ZONE7\0CORRECT\0INCORRECT\0FINISHED");
+    return *this;
 }
 

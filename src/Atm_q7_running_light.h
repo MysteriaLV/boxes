@@ -36,6 +36,8 @@ private:
 
     Atm_led *currentLed;
     Atm_led *currentUfo;
+
+    uint16_t calculatePosition();
 };
 
 /*

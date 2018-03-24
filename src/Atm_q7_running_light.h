@@ -33,6 +33,9 @@ private:
   enum { ENT_INIT, ENT_RUNNING, ENT_ZONE1, EXT_ZONE1, ENT_ZONE2, EXT_ZONE2, ENT_ZONE3, EXT_ZONE3, ENT_ZONE4, EXT_ZONE4, ENT_ZONE5, EXT_ZONE5, ENT_ZONE6, EXT_ZONE6, ENT_ZONE7, EXT_ZONE7, ENT_CORRECT, ENT_INCORRECT, ENT_FINISHED }; // ACTIONS
   int event( int id );
   void action( int id );
+
+    Atm_led *currentLed;
+    Atm_led *currentUfo;
 };
 
 /*

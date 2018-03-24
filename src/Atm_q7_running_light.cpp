@@ -2,6 +2,8 @@
 #include "Atm_main_sequence.h"
 #include "multipart_led_ribbon.h"
 
+const auto SPOT_WIDTH = 10;
+
 Atm_running_light q7RunningLight;
 
 /* Add optional parameters for the state machine to begin()
@@ -36,7 +38,7 @@ Atm_running_light &Atm_running_light::begin() {
 	button6.onPress(*this, this->EVT_BTN6_PRESSED);
 	button7.onPress(*this, this->EVT_BTN7_PRESSED);
 
-//	trace(Serial);
+	trace(Serial);
 	return *this;
 }
 
@@ -47,20 +49,20 @@ Atm_running_light &Atm_running_light::begin() {
 int Atm_running_light::event(int id) {
 	switch (id) {
 		case EVT_ZONE1:
-			return getLength() - tick_reverse_location.value == BTN1_POSITION;
+			return getLength() - tick_reverse_location.value == BTN1_POSITION + 2;      // Magic number so we don't miss point 0
 		case EVT_ZONE2:
-			return getLength() - tick_reverse_location.value == BTN2_POSITION;
-		case EVT_ZONE3:
-			return getLength() - tick_reverse_location.value == BTN3_POSITION;
-		case EVT_ZONE4:
-			return getLength() - tick_reverse_location.value == BTN4_POSITION;
-		case EVT_ZONE5:
-			return getLength() - tick_reverse_location.value == BTN5_POSITION;
-		case EVT_ZONE6:
-			return getLength() - tick_reverse_location.value == BTN6_POSITION;
-		case EVT_ZONE7:
-			return getLength() - tick_reverse_location.value == BTN7_POSITION;
-		case EVT_TIMEOUT:
+            return getLength() - tick_reverse_location.value == BTN2_POSITION - SPOT_WIDTH / 2;
+        case EVT_ZONE3:
+            return getLength() - tick_reverse_location.value == BTN3_POSITION - SPOT_WIDTH / 2;
+        case EVT_ZONE4:
+            return getLength() - tick_reverse_location.value == BTN4_POSITION - SPOT_WIDTH / 2;
+        case EVT_ZONE5:
+            return getLength() - tick_reverse_location.value == BTN5_POSITION - SPOT_WIDTH / 2;
+        case EVT_ZONE6:
+            return getLength() - tick_reverse_location.value == BTN6_POSITION - SPOT_WIDTH / 2;
+        case EVT_ZONE7:
+            return getLength() - tick_reverse_location.value == BTN7_POSITION - SPOT_WIDTH / 2;
+        case EVT_TIMEOUT:
 			return timer_timeout.expired(this);
 		default:
 			return 0;
@@ -97,49 +99,65 @@ void Atm_running_light::action(int id) {
 			counter_progress.set(7);
 			return;
 		case ENT_RUNNING:
-			multipartLedRibbon.fill_sold_ext(getLength() - tick_reverse_location.value, 1, CRGB::MediumSeaGreen);
+			multipartLedRibbon.fill_sold_ext(getLength() - tick_reverse_location.value, SPOT_WIDTH, CRGB::MediumSeaGreen);
 			tick_reverse_location.decrement();
-			multipartLedRibbon.fill_sold_ext(getLength() - tick_reverse_location.value, 1, CRGB::Red);
+			multipartLedRibbon.fill_sold_ext(getLength() - tick_reverse_location.value, SPOT_WIDTH, CRGB::Red);
 			multipartLedRibbon.show();
 
 			timer_timeout.set(next_tick_timeout);
 			return;
 		case ENT_ZONE1:
 			timer_timeout.set(next_press_timeout);
-			return;
+            currentLed = &led1;
+            currentUfo = &ufo1;
+            return;
 		case EXT_ZONE1:
 			return;
 		case ENT_ZONE2:
 			timer_timeout.set(next_press_timeout);
+            currentLed = &led2;
+            currentUfo = &ufo2;
 			return;
 		case EXT_ZONE2:
 			return;
 		case ENT_ZONE3:
 			timer_timeout.set(next_press_timeout);
+            currentLed = &led3;
+            currentUfo = &ufo3;
 			return;
 		case EXT_ZONE3:
 			return;
 		case ENT_ZONE4:
 			timer_timeout.set(next_press_timeout);
+            currentLed = &led4;
+            currentUfo = &ufo4;
 			return;
 		case EXT_ZONE4:
 			return;
 		case ENT_ZONE5:
 			timer_timeout.set(next_press_timeout);
+            currentLed = &led5;
+            currentUfo = &ufo5;
 			return;
 		case EXT_ZONE5:
 			return;
 		case ENT_ZONE6:
 			timer_timeout.set(next_press_timeout);
+            currentLed = &led6;
+            currentUfo = &ufo6;
 			return;
 		case EXT_ZONE6:
 			return;
 		case ENT_ZONE7:
 			timer_timeout.set(next_press_timeout);
+            currentLed = &led7;
+            currentUfo = &ufo7;
 			return;
 		case EXT_ZONE7:
 			return;
 		case ENT_CORRECT:
+            currentLed->on();
+            currentUfo->on();
 			counter_progress.decrement();
 			return;
 		case ENT_INCORRECT:

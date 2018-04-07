@@ -24,7 +24,7 @@ public:
 	uint32_t next_press_timeout = 10000;
 #else
 	virtual uint16_t getNumSteps() { return 10; };
-	uint32_t next_press_timeout = 300;
+	uint32_t next_press_timeout = 600;
 #endif
 
 	uint32_t next_press_timeout_per_step = 100;

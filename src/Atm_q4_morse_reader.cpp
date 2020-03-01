@@ -56,7 +56,7 @@ void Atm_morse_reader::action(int id) {
 		case ENT_IDLE:
 			timer_timeout.set(ATM_TIMER_OFF);
 
-			multipartLedRibbon.fill_sold_ext(this->getOffset(), getLength(), CRGB::Black);
+			multipartLedRibbon.fill_sold_ext(this->getOffset(), getFullLength(), CRGB::Black);
 			multipartLedRibbon.show();
 
 			// Define two leds (patterns)
@@ -101,7 +101,7 @@ void Atm_morse_reader::action(int id) {
 			multipartLedRibbon.show();
 			return;
 		case ENT_FINISHED:
-			multipartLedRibbon.fill_sold_ext(this->getOffset(), getLength(), CRGB::MediumSeaGreen);
+			multipartLedRibbon.fill_sold_ext(this->getOffset(), getFullLength(), CRGB::MediumSeaGreen);
 			multipartLedRibbon.show();
 
 			main_sequence.trigger(main_sequence.EVT_SOLVED);

@@ -22,7 +22,8 @@ class Atm_morse_reader: public Machine {
 	void action( int id ) override;
 
 	virtual uint16_t getOffset() { return Q4_START; };
-	virtual uint16_t getLength() { return (Q5_START - Q4_START) / 2; };
+	virtual uint16_t getLength() { return getFullLength() / 2; };
+	virtual uint16_t getFullLength() { return Q5_START - Q4_START; };
 
 	virtual uint16_t getNumSteps() { return 9; };
 	uint32_t next_press_timeout = 3000;

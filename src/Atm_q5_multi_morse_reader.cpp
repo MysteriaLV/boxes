@@ -59,7 +59,7 @@ void Atm_multi_morse_reader::action(int id) {
 			timer_timeout.set(2000);
 			counter_progress.set(getNumSteps());
 
-			multipartLedRibbon.fill_sold_ext(this->getOffset(), getLength(), CRGB::Black);
+			multipartLedRibbon.fill_sold_ext(this->getOffset(), getFullLength(), CRGB::Black);
 			multipartLedRibbon.show();
 			return;
 		case EXT_IDLE:
@@ -112,7 +112,7 @@ void Atm_multi_morse_reader::action(int id) {
 			led5.off();
 			return;
 		case ENT_FINISHED:
-			multipartLedRibbon.fill_sold_ext(this->getOffset(), getLength(), CRGB::MediumSeaGreen);
+			multipartLedRibbon.fill_sold_ext(this->getOffset(), getFullLength(), CRGB::MediumSeaGreen);
 			multipartLedRibbon.show();
 
 			main_sequence.trigger(main_sequence.EVT_SOLVED);

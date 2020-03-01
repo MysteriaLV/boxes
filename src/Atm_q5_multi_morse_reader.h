@@ -20,7 +20,8 @@ private:
 	void action( int id );
 
 	virtual uint16_t getOffset() { return Q5_START; };
-	virtual uint16_t getLength() { return (Q6_START - Q5_START) / 2; };
+	virtual uint16_t getLength() { return getFullLength() / 2; };
+	virtual uint16_t getFullLength() { return Q6_START - Q5_START; };
 
 	virtual uint16_t getNumSteps() { return 5; };
 	uint32_t next_press_timeout = 3000;

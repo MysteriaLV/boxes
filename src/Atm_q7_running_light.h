@@ -22,8 +22,8 @@ class Atm_running_light: public Machine {
 	uint32_t next_press_timeout = 10000;
 	uint32_t next_tick_timeout = 10;
 #else
-	uint32_t next_press_timeout = 300;
-	uint32_t next_tick_timeout = 200;
+	uint32_t next_press_timeout = 1000;
+	uint32_t next_tick_timeout = 50;
 #endif
 
 	uint32_t next_press_timeout_per_step = 100;

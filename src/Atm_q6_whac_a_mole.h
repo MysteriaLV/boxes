@@ -23,8 +23,8 @@ public:
 	virtual uint16_t getNumSteps() { return 3; };
 	uint32_t next_press_timeout = 10000;
 #else
-	virtual uint16_t getNumSteps() { return 10; };
-	uint32_t next_press_timeout = 600;
+	virtual uint16_t getNumSteps() { return 8; };
+	uint32_t next_press_timeout = 800;
 #endif
 
 	uint32_t next_press_timeout_per_step = 100;

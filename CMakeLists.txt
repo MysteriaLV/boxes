@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.2)
-project(Boxes)
+project(boxes)
 
 include(CMakeListsPrivate.txt)
 

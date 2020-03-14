@@ -1,5 +1,5 @@
-#define USE_HOLDING_REGISTERS_ONLY
 #include <Arduino.h>
+#include "Atm_main_sequence.h"
 
 #ifndef SKIP_MODBUS
 #include <Modbus.h>
@@ -67,10 +67,12 @@ void process_actions() {
 		case 1 : // Put here code for Reset
 			Serial.println("[Reset] action fired");
 			digitalWrite(LED_BUILTIN, HIGH);
+            main_sequence.reset();
 			break;
 		case 2 : // Put here code for Complete
-			Serial.println("[Complete] action fired");
+			Serial.println("[Complete step] action fired");
 			digitalWrite(LED_BUILTIN, LOW);
+            main_sequence.solved();
 			break;
 		default:
 			break;

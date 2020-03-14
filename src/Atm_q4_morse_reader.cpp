@@ -1,5 +1,4 @@
 #include "Atm_q4_morse_reader.h"
-#include "multipart_led_ribbon.h"
 #include "Atm_main_sequence.h"
 
 /* Add optional parameters for the state machine to begin()

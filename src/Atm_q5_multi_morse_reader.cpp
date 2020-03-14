@@ -1,5 +1,4 @@
 #include "Atm_q5_multi_morse_reader.h"
-#include "multipart_led_ribbon.h"
 #include "Atm_main_sequence.h"
 
 Atm_multi_morse_reader q5multiMorseReader;

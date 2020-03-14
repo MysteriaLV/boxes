@@ -8,23 +8,25 @@
 #include "Atm_q5_multi_morse_reader.h"
 #include "Atm_q6_whac_a_mole.h"
 #include "Atm_q7_running_light.h"
+#include "multipart_led_ribbon.h"
 
 class Atm_main_sequence: public Machine {
 
- public:
-  enum { Q1_ONE_BUTTON, Q2_TWO_BUTTONS, Q3_THREE_BUTTONS, Q4_SINGLE_MORSE, Q5_MULTI_MORSE, Q6_WHAC_A_MOLE, Q7_MULTI_SNAKE, COMPLETE }; // STATES
-  enum { EVT_SOLVED, ELSE }; // EVENTS
-  Atm_main_sequence( void ) : Machine() {};
-  Atm_main_sequence& begin( void );
-  Atm_main_sequence& trace( Stream & stream );
-  Atm_main_sequence& trigger( int event );
-  int state( void );
-  Atm_main_sequence& solved( void );
+public:
+    enum { Q1_ONE_BUTTON, Q2_TWO_BUTTONS, Q3_THREE_BUTTONS, Q4_SINGLE_MORSE, Q5_MULTI_MORSE, Q6_WHAC_A_MOLE, Q7_MULTI_SNAKE, COMPLETE }; // STATES
+    enum { EVT_SOLVED, EVT_RESET, ELSE }; // EVENTS
+    Atm_main_sequence( void ) : Machine() {};
+    Atm_main_sequence& begin( void );
+    Atm_main_sequence& trace( Stream & stream );
+    Atm_main_sequence& trigger( int event );
+    int state( void );
+    Atm_main_sequence& solved( void );
+    Atm_main_sequence& reset( void );
 
- private:
-  enum { ENT_Q1_ONE_BUTTON, ENT_Q2_TWO_BUTTONS, ENT_Q3_THREE_BUTTONS, ENT_Q4_SINGLE_MORSE, ENT_Q5_MULTI_MORSE, ENT_Q6_WHAC_A_MOLE, ENT_Q7_MULTI_SNAKE, ENT_COMPLETE }; // ACTIONS
-  int event( int id ); 
-  void action( int id ); 
+private:
+    enum { ENT_Q1_ONE_BUTTON, ENT_Q2_TWO_BUTTONS, ENT_Q3_THREE_BUTTONS, ENT_Q4_SINGLE_MORSE, ENT_Q5_MULTI_MORSE, ENT_Q6_WHAC_A_MOLE, ENT_Q7_MULTI_SNAKE, ENT_COMPLETE }; // ACTIONS
+    int event( int id );
+    void action( int id );
 
 };
 
@@ -50,30 +52,39 @@ Automaton::ATML::begin - Automaton Markup Language
     <states>
       <Q1_ONE_BUTTON index="0" on_enter="ENT_Q1_ONE_BUTTON">
         <EVT_SOLVED>Q2_TWO_BUTTONS</EVT_SOLVED>
+        <EVT_RESET>Q1_ONE_BUTTON</EVT_RESET>
       </Q1_ONE_BUTTON>
       <Q2_TWO_BUTTONS index="1" on_enter="ENT_Q2_TWO_BUTTONS">
         <EVT_SOLVED>Q3_THREE_BUTTONS</EVT_SOLVED>
+        <EVT_RESET>Q1_ONE_BUTTON</EVT_RESET>
       </Q2_TWO_BUTTONS>
       <Q3_THREE_BUTTONS index="2" on_enter="ENT_Q3_THREE_BUTTONS">
         <EVT_SOLVED>Q4_SINGLE_MORSE</EVT_SOLVED>
+        <EVT_RESET>Q1_ONE_BUTTON</EVT_RESET>
       </Q3_THREE_BUTTONS>
       <Q4_SINGLE_MORSE index="3" on_enter="ENT_Q4_SINGLE_MORSE">
         <EVT_SOLVED>Q5_MULTI_MORSE</EVT_SOLVED>
+        <EVT_RESET>Q1_ONE_BUTTON</EVT_RESET>
       </Q4_SINGLE_MORSE>
       <Q5_MULTI_MORSE index="4" on_enter="ENT_Q5_MULTI_MORSE">
         <EVT_SOLVED>Q6_WHAC_A_MOLE</EVT_SOLVED>
+        <EVT_RESET>Q1_ONE_BUTTON</EVT_RESET>
       </Q5_MULTI_MORSE>
       <Q6_WHAC_A_MOLE index="5" on_enter="ENT_Q6_WHAC_A_MOLE">
         <EVT_SOLVED>Q7_MULTI_SNAKE</EVT_SOLVED>
+        <EVT_RESET>Q1_ONE_BUTTON</EVT_RESET>
       </Q6_WHAC_A_MOLE>
       <Q7_MULTI_SNAKE index="6" on_enter="ENT_Q7_MULTI_SNAKE">
         <EVT_SOLVED>COMPLETE</EVT_SOLVED>
+        <EVT_RESET>Q1_ONE_BUTTON</EVT_RESET>
       </Q7_MULTI_SNAKE>
       <COMPLETE index="7" on_enter="ENT_COMPLETE">
+        <EVT_RESET>Q1_ONE_BUTTON</EVT_RESET>
       </COMPLETE>
     </states>
     <events>
       <EVT_SOLVED index="0" access="PUBLIC"/>
+      <EVT_RESET index="1" access="PUBLIC"/>
     </events>
     <connectors>
     </connectors>
@@ -84,4 +95,3 @@ Automaton::ATML::begin - Automaton Markup Language
 
 Automaton::ATML::end
 */
-

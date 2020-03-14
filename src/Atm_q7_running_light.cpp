@@ -1,6 +1,5 @@
 #include "Atm_q7_running_light.h"
 #include "Atm_main_sequence.h"
-#include "multipart_led_ribbon.h"
 
 const auto SPOT_WIDTH = 10;
 

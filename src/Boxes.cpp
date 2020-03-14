@@ -1,12 +1,8 @@
 #include "Atm_main_sequence.h"
-#include "multipart_led_ribbon.h"
 
 extern void modbus_setup();
-
 extern void modbus_loop();
 
-//#define MY_TEST_MODE
-//#define MY_EASY_MODE
 Atm_timer test_mode_timer1;
 Atm_timer test_mode_timer2;
 

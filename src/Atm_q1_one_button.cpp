@@ -1,5 +1,4 @@
 #include "Atm_q1_one_button.h"
-#include "multipart_led_ribbon.h"
 #include "Atm_main_sequence.h"
 
 Atm_q1_one_button q1OneButton;

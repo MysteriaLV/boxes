@@ -15,7 +15,7 @@ Machine &Atm_q1_one_button::begin() {
     // clang-format on
     Machine::begin(state_table, ELSE);
 
-    button1 .onPress(*this, this->EVT_MAKE_PROGRESS)
+    button1.onPress(*this, this->EVT_MAKE_PROGRESS)
             .onRelease(*this, this->EVT_WRONG_MOVE);
 
     counter_progress.set(ATM_COUNTER_OFF);

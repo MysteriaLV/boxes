@@ -11,7 +11,7 @@ Atm_main_sequence main_sequence;
  * Add extra initialization code
  */
 
-Atm_main_sequence& Atm_main_sequence::begin() {
+Atm_main_sequence &Atm_main_sequence::begin() {
 // clang-format off
     const static state_t state_table[] PROGMEM = {
             /*                                 ON_ENTER  ON_LOOP  ON_EXIT        EVT_SOLVED      EVT_RESET  ELSE */
@@ -25,7 +25,7 @@ Atm_main_sequence& Atm_main_sequence::begin() {
             /*         COMPLETE */         ENT_COMPLETE,      -1,      -1,               -1, Q1_ONE_BUTTON,   -1,
     };
 // clang-format on
-    Machine::begin( state_table, ELSE );
+    Machine::begin(state_table, ELSE);
     return *this;
 }
 
@@ -41,44 +41,62 @@ int Atm_main_sequence::event(int id) {
  * This generates the 'output' for the state machine
  */
 
+void do_nothing(int idx, int v, int up) {};
+
+
 void Atm_main_sequence::action(int id) {
     switch (id) {
         case ENT_Q1_ONE_BUTTON:
             // Reset
+            q2TwoButtons.sleep(ATM_SLEEP_FLAG);
+            q3ThreeButtons.sleep(ATM_SLEEP_FLAG);
+            q4SingleMorseReader.sleep(ATM_SLEEP_FLAG);
+            q5multiMorseReader.sleep(ATM_SLEEP_FLAG);
+            q6WhacAMole.sleep(ATM_SLEEP_FLAG);
+            q7RunningLight.sleep(ATM_SLEEP_FLAG);
+
             multipartLedRibbon.fill_sold_ext(Q1_START, Q_LAST_LED, CRGB::Black);
             multipartLedRibbon.show();
 
-            led1.off();
+            led1.blink(ATM_TIMER_OFF, ATM_TIMER_OFF, 0).off();
             ufo1.off();
             door1.off();
+            button1.onPress(do_nothing).onRelease(do_nothing);
 
-            led2.off();
+            led2.blink(ATM_TIMER_OFF, ATM_TIMER_OFF, 0).off();
             ufo2.off();
             door2.on();
+            button2.onPress(do_nothing).onRelease(do_nothing);
 
-            led3.off();
+            led3.blink(ATM_TIMER_OFF, ATM_TIMER_OFF, 0).off();
             ufo3.off();
             door3.on();
+            button3.onPress(do_nothing).onRelease(do_nothing);
 
-            led4.off();
+            led4.blink(ATM_TIMER_OFF, ATM_TIMER_OFF, 0).off();
             ufo4.off();
             door4.on();
+            button4.onPress(do_nothing).onRelease(do_nothing);
 
-            led5.off();
+            led5.blink(ATM_TIMER_OFF, ATM_TIMER_OFF, 0).off();
             ufo5.off();
             door5.on();
+            button5.onPress(do_nothing).onRelease(do_nothing);
 
-            led6.off();
+            led6.blink(ATM_TIMER_OFF, ATM_TIMER_OFF, 0).off();
             ufo6.off();
             door6.on();
+            button6.onPress(do_nothing).onRelease(do_nothing);
 
-            led7.off();
+            led7.blink(ATM_TIMER_OFF, ATM_TIMER_OFF, 0).off();
             ufo7.off();
             door7.on();
+            button7.onPress(do_nothing).onRelease(do_nothing);
 
-            led8.off();
+            led8.blink(ATM_TIMER_OFF, ATM_TIMER_OFF, 0).off();
             ufo8.off();
             door8.on();
+            button8.onPress(do_nothing).onRelease(do_nothing);
 
             // First puzzle
             q1OneButton.begin();
@@ -187,8 +205,8 @@ Atm_main_sequence &Atm_main_sequence::solved() {
     return *this;
 }
 
-Atm_main_sequence& Atm_main_sequence::reset() {
-    trigger( EVT_RESET );
+Atm_main_sequence &Atm_main_sequence::reset() {
+    trigger(EVT_RESET);
     return *this;
 }
 
@@ -196,8 +214,8 @@ Atm_main_sequence& Atm_main_sequence::reset() {
  * Sets the symbol table and the default logging method for serial monitoring
  */
 
-Atm_main_sequence& Atm_main_sequence::trace( Stream & stream ) {
-    Machine::setTrace( &stream, atm_serial_debug::trace,
-                       "MAIN_SEQUENCE\0EVT_SOLVED\0EVT_RESET\0ELSE\0Q1_ONE_BUTTON\0Q2_TWO_BUTTONS\0Q3_THREE_BUTTONS\0Q4_SINGLE_MORSE\0Q5_MULTI_MORSE\0Q6_WHAC_A_MOLE\0Q7_MULTI_SNAKE\0COMPLETE" );
+Atm_main_sequence &Atm_main_sequence::trace(Stream &stream) {
+    Machine::setTrace(&stream, atm_serial_debug::trace,
+                      "MAIN_SEQUENCE\0EVT_SOLVED\0EVT_RESET\0ELSE\0Q1_ONE_BUTTON\0Q2_TWO_BUTTONS\0Q3_THREE_BUTTONS\0Q4_SINGLE_MORSE\0Q5_MULTI_MORSE\0Q6_WHAC_A_MOLE\0Q7_MULTI_SNAKE\0COMPLETE");
     return *this;
 }
